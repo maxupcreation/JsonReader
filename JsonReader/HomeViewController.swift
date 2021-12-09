@@ -16,7 +16,6 @@ class HomeViewController: UIViewController, UIDocumentPickerDelegate,UINavigatio
     override func viewDidLoad() {
         super.viewDidLoad()
         addButton()
-        
     }
     
     public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
@@ -47,13 +46,6 @@ class HomeViewController: UIViewController, UIDocumentPickerDelegate,UINavigatio
         documentPickerController.delegate = self
         self.present(documentPickerController, animated: true, completion: nil)
     }
-    
-//    func clickFunction(){
-//        let importMenu = UIDocumentPickerViewController(documentTypes: [String(UTType.json)], in: .import)
-//        importMenu.delegate = self
-//        importMenu.modalPresentationStyle = .formSheet
-//        self.present(importMenu, animated: true, completion: nil)
-//    }
     
     @objc func buttonTapped() {
    selectFiles()
