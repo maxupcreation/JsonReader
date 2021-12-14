@@ -1,0 +1,2107 @@
+{
+  "Library Name" : "main.snippetslablibrary",
+  "Date Exported" : "2021-12-07 13:52:07 +0100",
+  "Snippets Count" : "110",
+  "Snippets" : [
+    {
+      "Date Created" : "2021-03-10 01:10:22 +0100",
+      "Date Modified" : "2021-03-10 01:11:03 +0100",
+      "Folder" : "Cell",
+      "Title" : "Swipe de gauche à droite",
+      "Fragments" : [
+        {
+          "Content" : "    \n    \/\/On initialise\n    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {\n        let returnAction = returnActionInObjective(at: indexPath)\n        return UISwipeActionsConfiguration(actions: [returnAction])\n    }\n    \n    \/\/On créer l'option du swipe\n    func returnActionInObjective(at indexPath:IndexPath)-> UIContextualAction{\n        let action = UIContextualAction(style: .destructive, title: \"Renvoyer\") { (action,view,completion) in\n            completion(true)\n            let name = self.coreDataManager?.homeActions[indexPath.row].action ?? \"no data\"\n            \n            self.coreDataManager?.deleteAction(action:name)\n            \n            self.tableView.deleteRows(at: [indexPath], with: .fade  )\n            \n        }\n        action.backgroundColor = .orange\n        \n        return action\n    }",
+          "Date Modified" : "2021-03-10 01:11:45 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-03-10 01:10:22 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-06-08 21:59:56 +0200",
+      "Date Modified" : "2021-06-08 22:00:11 +0200",
+      "Folder" : "RSS",
+      "Title" : "ViewController",
+      "Fragments" : [
+        {
+          "Content" : "\nimport UIKit\nimport WebKit\n\nclass FeedItemWebViewController: UIViewController {\n    @IBOutlet var webView: WKWebView!\n    var selectedFeedURL: String?\n    \n    override func viewDidLoad() {\n        super.viewDidLoad()\n        selectedFeedURL =  selectedFeedURL?.replacingOccurrences(of: \" \", with:\"\")\n        selectedFeedURL =  selectedFeedURL?.replacingOccurrences(of: \"\\t\", with:\"\")\n        selectedFeedURL =  selectedFeedURL?.replacingOccurrences(of: \"\\n\", with:\"\")\n        webView.load(URLRequest(url: URL(string: selectedFeedURL!)!))\n    }\n    \n    override func viewDidAppear(_ animated: Bool) {\n        super.viewDidAppear( animated )\n    }\n}\n",
+          "Date Modified" : "2021-06-08 22:00:20 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-06-08 21:59:56 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-10 10:53:21 +0100",
+      "Date Modified" : "2021-02-10 10:53:36 +0100",
+      "Folder" : "Cell",
+      "Title" : "Drag and drop cell",
+      "Fragments" : [
+        {
+          "Content" : "\/\/ Create \"OrderIndex\" type Int(32) in entity\n\n\/\/ Add in coreManager\nrequest.sortDescriptors = [NSSortDescriptor(key: \"orderIndex\", ascending: true)]\n\n\/\/In tableView\n\nfunc tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {\n\n    if var items = coreDataManager?.homeActions,\n        let itemToMove = coreDataManager?.homeActions[sourceIndexPath.row] {\n\n        items.remove(at: sourceIndexPath.row)\n        items.insert(itemToMove, at: destinationIndexPath.row)\n\n        for (index, item) in items.enumerated() {\n            item.orderIndex = Int32(index)\n        }\n    }\n\n}",
+          "Date Modified" : "2021-03-05 15:24:20 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-10 10:53:21 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-09-07 11:02:26 +0200",
+      "Date Modified" : "2021-09-07 11:02:39 +0200",
+      "Folder" : "SWIFTUI",
+      "Title" : "Color literal",
+      "Fragments" : [
+        {
+          "Content" : "Color(#colorLiteral(red: 1, green: 0, blue: 0, alpha: 1))",
+          "Date Modified" : "2021-09-07 11:02:27 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Plain Text",
+          "Date Created" : "2021-09-07 11:02:26 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-05-18 01:50:49 +0200",
+      "Date Modified" : "2021-05-19 01:04:53 +0200",
+      "Folder" : "Visuel",
+      "Title" : "Ajouter label en code (à revoir)",
+      "Fragments" : [
+        {
+          "Content" : "let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))\nlabel.center = CGPoint(x: 160, y: 285)\nlabel.textAlignment = .center\nlabel.text = \"I'm a test label\"\nself.view.addSubview(label)\n\n\/\/ Trouver comment l'intégrer avec des contraintes sans crash. Pas adapté à tout les écrans...",
+          "Date Modified" : "2021-05-19 01:04:42 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-05-18 01:50:49 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-15 15:55:09 +0100",
+      "Date Modified" : "2021-02-15 15:55:32 +0100",
+      "Folder" : "Tableau",
+      "Title" : "Filter un tableau avec le NSpredicate",
+      "Fragments" : [
+        {
+          "Content" : "let heroes = [\"tracer\", \"bastion\", \"reaper\", \"junkrat\", \"roadhog\"]\n\nlet template = NSPredicate(format: \"self BEGINSWITH $letter\")\n\nlet beginsWithRVariables = [\"letter\": \"r\"]\nlet beginsWithR = template.predicateWithSubstitutionVariables(beginsWithRVariables)\n\nlet beginsWithRHeroes = heroes.filter { beginsWithR.evaluateWithObject($0) }\n\/\/ [\"reaper\", \"roadhog\"]\n\nlet beginsWithTVariables = [\"letter\": \"t\"]\nlet beginsWithT = template.predicateWithSubstitutionVariables(beginsWithTVariables)\n\nlet beginsWithTHeroes = heroes.filter { beginsWithT.evaluateWithObject($0) }\n\/\/ [\"tracer\"]\n\n\n\/\/ Syntax\n\/\/ #\n\n\/\/ Predicate Format String Substitions\n\/\/ C format string specifiers: %d, %s, %f, etc\n\n\/\/ Object substitution: %@\n\n\/\/ Keypath substitution: %K\n\n\/\/ Predicate Comparison Operators\n\n\/\/ =, ==: Left-hand expression equals right-hand expression\n\/\/ >=, =>: Left-hand expression is greater than or equal to right-hand expression\n\/\/ <=, =<: Left-hand expression is less than or equal to right-hand expression\n\/\/ >: Left-hand expression is greater than right-hand expression\n\/\/ <: Left-hand expression is less than right-hand expression\n\/\/ !=, <>: Left-hand expression is not equal to right-hand expression\n\n\/\/ BETWEEN: Left-hand expression is between or equal to either of the values in the right-hand expression, which specifies lower and upper bounds - ex: BETWEEN { 0, 5 }\n\/\/ Predicate Compound Operators\n\/\/ AND, &&: Logical AND\n\/\/ OR, ||: Logical OR\n\/\/ NOT, !: Logical NOT\n\/\/ Predicate String Comparison Operators\n\/\/ BEGINSWITH: Left-hand expression begins with right-hand expression\n\/\/ ENDSWITH: Left-hand expression ends with right-hand expression\n\/\/ CONTAINS: Left-hand expression contains right-hand expression\n\/\/ LIKE: Left-hand expression equals right-hand expression, with wildcard substitution\n\/\/ *: Match zero or more characters\n\/\/ ?: Match one character\n",
+          "Date Modified" : "2021-02-15 16:01:16 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-15 15:55:09 +0100"
+        }
+      ],
+      "Tags" : [
+        "Array",
+        "NSPredicate"
+      ]
+    },
+    {
+      "Date Created" : "2021-09-20 15:38:03 +0200",
+      "Date Modified" : "2021-09-20 15:38:09 +0200",
+      "Folder" : "SWIFTUI",
+      "Title" : "Changer background",
+      "Fragments" : [
+        {
+          "Content" : "struct ContentView: View {\n    \n    init() {\n        UITableView.appearance().backgroundColor = .white\n    }\n}",
+          "Date Modified" : "2021-09-20 15:38:20 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-09-20 15:38:03 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-07-25 17:19:46 +0200",
+      "Date Modified" : "2021-07-25 17:19:59 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Even aglorithmes",
+      "Fragments" : [
+        {
+          "Content" : "for n in arr{\n    if(n % 2 == 0){\n        print(\"\\(n) is even\")\n    }else{\n        print(\"\\(n) is odd\")\n    }\n}",
+          "Date Modified" : "2021-07-25 17:20:04 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-07-25 17:19:46 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-19 02:30:11 +0100",
+      "Date Modified" : "2021-02-19 02:30:11 +0100",
+      "Folder" : "KeyBoard",
+      "Title" : "Faire monter la vue quand un textField est utilisé en bas",
+      "Fragments" : [
+        {
+          "Content" : "\/\/EDIT FOR SWIFT 4.2:\n\n    override func viewDidLoad() {\n    super.viewDidLoad()\n    \n    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)\n    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)\n    \n    \n}\n\n@objc func keyboardWillShow(notification: NSNotification) {\n    if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {\n        if self.view.frame.origin.y == 0 {\n            self.view.frame.origin.y -= keyboardSize.height\n        }\n    }\n}\n\n@objc func keyboardWillHide(notification: NSNotification) {\n    if self.view.frame.origin.y != 0 {\n        self.view.frame.origin.y = 0\n    }\n}",
+          "Date Modified" : "2021-02-19 03:37:08 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-19 02:30:11 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-20 01:13:00 +0100",
+      "Date Modified" : "2021-02-20 01:13:00 +0100",
+      "Folder" : "Uncategorized",
+      "Title" : "Ajouter des jours ",
+      "Fragments" : [
+        {
+          "Content" : "var dayComponent    = DateComponents()\ndayComponent.day    = 1 \/\/ For removing one day (yesterday): -1\nlet theCalendar     = Calendar.current\nlet nextDate        = theCalendar.date(byAdding: dayComponent, to: Date())\nprint(\"nextDate : \\(nextDate)\")",
+          "Date Modified" : "2021-02-20 01:13:00 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-20 01:13:00 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 15:16:15 +0100",
+      "Date Modified" : "2021-01-26 18:48:50 +0100",
+      "Folder" : "Tableau",
+      "Title" : "Convertir un tableau de String en une suite avec des séparateurs",
+      "Fragments" : [
+        {
+          "Content" : "\/\/— 💡\n        \n        var ingredientsArrayEmpty : [String] = []\n        \n        for tonArray in TonCoreDataOuTaStruct.TonArray {\n            ingredientsArrayEmpty.append(TonArray.text)\n        }\n        \n        let ingredientsArrayConvertedToString = ingredientsArrayEmpty.joined(separator: \"\\n - \")\n        \n        let ingredients = \"-\" + \" \" + ingredientsArrayConvertedToString\n        \n        ingredientsTextView.text = ingredients\n        \n\/\/ X",
+          "Date Modified" : "2021-01-26 15:16:15 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 15:16:15 +0100"
+        }
+      ],
+      "Tags" : [
+        "Array",
+        "String"
+      ]
+    },
+    {
+      "Date Created" : "2021-01-27 17:30:30 +0100",
+      "Date Modified" : "2021-01-27 17:32:16 +0100",
+      "Folder" : "Uncategorized",
+      "Title" : "NSpredicate (Suppression)",
+      "Fragments" : [
+        {
+          "Content" : "    func ifRecipeRegisteredThenDeleteFavorite(name:String){\n        \n        let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()\n        request.predicate = NSPredicate(format: \"label == %@\", name)\n        guard let favorites = try? managedObjectContext.fetch(request) else { return }\n        guard let favorite = favorites.first else {return}\n        managedObjectContext.delete(favorite)\n        coreDataStack.saveContext()\n}",
+          "Date Modified" : "2021-02-09 24:49:37 +0100",
+          "Note" : "Comparer deux éléments dans un tableau et l'isoler pour le supprimer",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-27 17:30:30 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-23 13:45:38 +0100",
+      "Date Modified" : "2021-02-23 13:45:38 +0100",
+      "Folder" : "Divers",
+      "Title" : "Enum",
+      "Fragments" : [
+        {
+          "Content" : "directionToHead = .south\nswitch directionToHead {\ncase .north:\n    print(\"Lots of planets have a north\")\ncase .south:\n    print(\"Watch out for penguins\")\ncase .east:\n    print(\"Where the sun rises\")\ncase .west:\n    print(\"Where the skies are blue\")\n}",
+          "Date Modified" : "2021-02-23 13:45:38 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-23 13:45:38 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 14:17:42 +0100",
+      "Date Modified" : "2021-01-26 14:18:10 +0100",
+      "Folder" : "Visuel",
+      "Title" : "Animation des cellules stylés (fondu, déplacement)",
+      "Fragments" : [
+        {
+          "Content" : " \/\/— 💡 Stylish animation to the cell display.\n    \n    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {\nlet translationMovement = CATransform3DTranslate(CATransform3DIdentity, 20, 50, 30)\n\ncell.layer.transform = translationMovement\ncell.alpha = 0\n\nUIView.animate(withDuration: 0.80) {\n\n    cell.layer.transform = CATransform3DIdentity\n    cell.alpha = 1\n\n}\n        \n        cell.selectionStyle = .none\n    }\n}",
+          "Date Modified" : "2021-09-28 16:18:14 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 14:17:42 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-31 19:06:05 +0100",
+      "Date Modified" : "2021-01-31 19:06:05 +0100",
+      "Folder" : "CoreData",
+      "Title" : "CoreData Test",
+      "Fragments" : [
+        {
+          "Content" : "\n@testable import Reciplease\nimport XCTest\n\nfinal class CoreDataManagerTests: XCTestCase {\n\n    \/\/ MARK: - Properties\n\n    var coreDataStack: MockCoreDataStack!\n    var coreDataManager: CoreDataManager!\n\n    \/\/ MARK: - Tests Life Cycle\n\n    override func setUp() {\n        super.setUp()\n        coreDataStack = MockCoreDataStack()\n        coreDataManager = CoreDataManager(coreDataStack: coreDataStack)\n    }\n\n    override func tearDown() {\n        super.tearDown()\n        coreDataManager = nil\n        coreDataStack = nil\n    }\n    \n    \/\/MARK:- Tests\n    \/\/Exemples :\n    \n    func TestYourMethod_WhenAnEntityCreated_ThenShouldBeCorrectSaved() {\n    \n    coreDataManager.createFavorite(label: \"test\", calories: \"10\", image: UIImage(named: \"default\")!, ingredients: [\"ingredientsTest\"], totalTime: \"totalTime\", yield: \"yield\", url: \"url\")\n    \nXCTAssertTrue(!coreDataManager.favorite.isEmpty)\n\nXCTAssertTrue(coreDataManager.favorite.count == 1)\n\nXCTAssertTrue(coreDataManager.favorite.first?.label == \"test\")\n        \n    }\n    \n    func testDeleteAllTasksMethod_WhenAnEntityIsCreated_ThenShouldBeCorrectlyDeleted() {\n\n    coreDataManager.createFavorite(label: \"test\", calories: \"10\", image: UIImage(named: \"default\")!, ingredients: [\"ingredientsTest\"], totalTime: \"totalTime\", yield: \"yield\", url: \"url\")\n\n    coreDataManager.ifRecipeRegisteredThenDeleteFavorite(name: \"test\")\n\n    XCTAssertTrue(coreDataManager.favorite.isEmpty)\n}",
+          "Date Modified" : "2021-01-31 19:06:05 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-31 19:06:05 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-10-19 22:14:55 +0200",
+      "Date Modified" : "2021-10-19 22:15:04 +0200",
+      "Folder" : "KeyBoard",
+      "Title" : "swift slide practice",
+      "Fragments" : [
+        {
+          "Content" : "\/\/\n\/\/  ViewController.swift\n\/\/  Practice\n\/\/\n\/\/  Created by Maxime on 18\/10\/2021.\n\/\/\n\nimport UIKit\n\nclass ViewController: UIViewController {\n    @IBOutlet weak var slider: UISlider!\n    @IBOutlet weak var label: UILabel!\n\n    override func viewDidLoad() {\n        super.viewDidLoad()\n\n    }\n\n    @IBAction func sliderAction(_ sender: Any) {\n        let sliderValue = Int(slider.value)\n        label.text = String(sliderValue)\n        label.font = UIFont.systemFont(ofSize: CGFloat(sliderValue), weight: .semibold)\n    }\n}\n",
+          "Date Modified" : "2021-10-22 24:14:58 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-10-19 22:14:55 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-08-17 13:03:22 +0200",
+      "Date Modified" : "2021-08-17 13:03:40 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Envoyer un demo d'une apps",
+      "Fragments" : [
+        {
+          "Content" : "https:\/\/appetize.io",
+          "Date Modified" : "2021-08-17 13:03:40 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Plain Text",
+          "Date Created" : "2021-08-17 13:03:22 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 14:43:35 +0100",
+      "Date Modified" : "2021-01-26 14:43:51 +0100",
+      "Folder" : "TableView",
+      "Title" : "Créer un texte dans une tableView quand elle est vide",
+      "Fragments" : [
+        {
+          "Content" : "extension TonViewController {\n    \n    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {\n        let label = UILabel()\n        label.text = \"Ton texte\"\n        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)\n        label.textAlignment = .center\n        label.textColor = .darkGray\n        label.numberOfLines = 0\n        return label\n    }\n    \n    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {\n        return coreDataManager?.favorite.isEmpty ?? true ? 450 : 0\n    }\n}",
+          "Date Modified" : "2021-01-26 18:37:11 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 14:43:35 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-08-27 14:34:53 +0200",
+      "Date Modified" : "2021-08-27 14:35:00 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "image literal",
+      "Fragments" : [
+        {
+          "Content" : "#imageLiteral(resourceName: \"name.extension\")",
+          "Date Modified" : "2021-08-27 14:35:21 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-08-27 14:34:53 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-08-02 19:28:32 +0200",
+      "Date Modified" : "2021-08-02 19:29:53 +0200",
+      "Folder" : "Cell",
+      "Title" : "Rendre une cell selectionnable et pas une autre",
+      "Fragments" : [
+        {
+          "Content" : "\/\/Pour que ça marhce il faut utiliser \nself.isUserInteractionEnabled = false\n\/\/ Mais il dois être dans la class UITableViewCell à part, sinon ça ne marche pas. \n\n\/\/ Exemple dans le cas ou un joueur selectionne un autre joueur et ne dois donc pas pouvoir se selectionner lui même \n\nif index.row == Int(turnPlayer) {\n    if coreDataManager.game.first?.rowCondition == true {\n        self.playerStackView.alpha = 0.3\n        self.selectionStyle = .gray\n        self.isUserInteractionEnabled = false\n    }\n} else {\n    self.playerStackView.alpha = 1\n    self.selectionStyle = .default\n    self.isUserInteractionEnabled = true\n}",
+          "Date Modified" : "2021-08-02 19:31:46 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-08-02 19:28:32 +0200"
+        }
+      ],
+      "Tags" : [
+        "problem",
+        "cell",
+        "tableView",
+        "didselectRowAt"
+      ]
+    },
+    {
+      "Date Created" : "2021-07-14 14:24:57 +0200",
+      "Date Modified" : "2021-07-14 14:25:46 +0200",
+      "Folder" : "CoreData",
+      "Title" : "Delete all entity",
+      "Fragments" : [
+        {
+          "Content" : "   func deleteAllPlayers(){\n       players.forEach { managedObjectContext.delete($0) }\n        coreDataStack.saveContext()\n    }",
+          "Date Modified" : "2021-07-14 14:25:28 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-07-14 14:24:57 +0200"
+        }
+      ],
+      "Tags" : [
+        "for each",
+        "forEach ",
+        "coredata"
+      ]
+    },
+    {
+      "Date Created" : "2021-03-26 11:16:52 +0100",
+      "Date Modified" : "2021-03-26 11:17:00 +0100",
+      "Folder" : "Tests",
+      "Title" : "FakeCoreData",
+      "Fragments" : [
+        {
+          "Content" : "\nimport Reciplease\nimport Foundation\nimport CoreData\n\nfinal class FakeCoreDataStack: CoreDataStack {\n\n    \/\/ MARK: - Initializer\n\n    convenience init() {\n        self.init(modelName: \"RecipleaseCoreData\")\n    }\n\n    override init(modelName: String) {\n        super.init(modelName: modelName)\n        let persistentStoreDescription = NSPersistentStoreDescription()\n        persistentStoreDescription.type = NSInMemoryStoreType\n        let container = NSPersistentContainer(name: modelName)\n        container.persistentStoreDescriptions = [persistentStoreDescription]\n        container.loadPersistentStores { storeDescription, error in\n            if let error = error as NSError? {\n                fatalError(\"Unresolved error \\(error), \\(error.userInfo)\")\n            }\n        }\n        self.persistentContainer = container\n    }\n}\n\n\n\/\/ tests : \n\nclass SmileBoxTests: XCTestCase {\n    \nMARK: - Properties\n\nvar coreDataStack: FakeCoreData!\nvar coreDataManager: CoreDataManager!\n\n\/\/ MARK: - Tests Life Cycle\n\noverride func setUp() {\n    super.setUp()\n    coreDataStack = FakeCoreData()\n    coreDataManager = CoreDataManager(coreDataStack: coreDataStack)\n}\n\noverride func tearDown() {\n    super.tearDown()\n    coreDataManager = nil\n    coreDataStack = nil\n}\n\n\/\/ MARK: - Tests\n\n\/\/ MARK: - Action\n\nfunc testMethodCreateAction_WhenCreateActionThenCorrectSaved() {\n    coreDataManager?.createActionWithTagObjective(action: \"test\", tag: \"\")\n\n    XCTAssertFalse(coreDataManager.homeActions.isEmpty)\n    XCTAssertTrue(coreDataManager.homeActions.first?.action == \"test\")\n}\n\nfunc testMethodDeleteAction_WhenIDeleteAnActionItIsCorrectlyDeleted() {\n    coreDataManager?.createActionWithTagObjective(action: \"test\", tag: \"\")\n    coreDataManager.deleteAction(action: \"test\")\n\n    XCTAssertTrue(coreDataManager.homeActions.isEmpty)\n}\n\n}",
+          "Date Modified" : "2021-10-11 14:12:59 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-03-26 11:16:52 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 13:57:53 +0100",
+      "Date Modified" : "2021-01-26 19:19:52 +0100",
+      "Folder" : "CoreData",
+      "Title" : "CoreDataStack",
+      "Fragments" : [
+        {
+          "Content" : "\nimport CoreData\n\nopen class CoreDataStack {\n\n    \/\/ MARK: - Properties\n\n    private let modelName: String\n\n    \/\/ MARK: - Initializer\n\n    public init(modelName: String) {\n        self.modelName = modelName\n    }\n\n    \/\/ MARK: - Core Data stack\n\n    public lazy var persistentContainer: NSPersistentContainer = {\n        let container = NSPersistentContainer(name: modelName)\n        container.loadPersistentStores(completionHandler: { (storeDescription, error) in\n            if let error = error as NSError? {\n                fatalError(\"Unresolved error \\(error), \\(error.userInfo)\")\n            }\n        })\n        return container\n    }()\n\n    public lazy var mainContext: NSManagedObjectContext = {\n        return persistentContainer.viewContext\n    }()\n\n    public func saveContext() {\n        guard mainContext.hasChanges else { return }\n        do {\n            try mainContext.save()\n        } catch let error as NSError {\n            print(\"Unresolved error \\(error), \\(error.userInfo)\")\n        }\n    }\n}\n",
+          "Date Modified" : "2021-09-13 15:19:06 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 13:57:53 +0100"
+        }
+      ],
+      "Tags" : [
+        "Data"
+      ]
+    },
+    {
+      "Date Created" : "2021-09-29 23:27:19 +0200",
+      "Date Modified" : "2021-09-29 23:35:07 +0200",
+      "Folder" : "KeyBoard",
+      "Title" : "Renvoyer un INT aléatoire mais jamais la même deux fois d'affilées",
+      "Fragments" : [
+        {
+          "Content" : "extension Int {\n    static func random(in range: ClosedRange<Int>, excluding x: Int) -> Int {\n        if range.contains(x) {\n            let r = Int.random(in: Range(uncheckedBounds: (range.lowerBound, range.upperBound)))\n            return r == x ? range.upperBound : r\n        } else {\n            return Int.random(in: range)\n        }\n    }\n}",
+          "Date Modified" : "2021-09-30 24:15:14 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-09-29 23:27:19 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-06-28 14:15:56 +0200",
+      "Date Modified" : "2021-06-28 14:16:23 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Z position (gérer couches)",
+      "Fragments" : [
+        {
+          "Content" : "  addPlayersButtonOutlet.layer.zPosition = 1",
+          "Date Modified" : "2021-06-28 14:16:09 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Plain Text",
+          "Date Created" : "2021-06-28 14:15:56 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-07-15 18:53:11 +0200",
+      "Date Modified" : "2021-07-16 22:07:30 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "retourner un index aléatoire par rapport à un tableau",
+      "Fragments" : [
+        {
+          "Content" : "    func randomCapacityReturn(arrayChallenge:[String:Int]) -> Int {\n            let index = Int.random(in: 0..<arrayChallenge.count)\n            return index\n    }",
+          "Date Modified" : "2021-07-19 22:26:41 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-07-15 18:53:11 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-08-27 11:15:28 +0200",
+      "Date Modified" : "2021-08-27 14:27:28 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Gif",
+      "Fragments" : [
+        {
+          "Content" : "\n    \nimport statements.\nimport ImageIO\nimport MobileCoreServices\n\n\n    func generateGif(photos: [UIImage], filename: String) -> Bool {\n        let documentsDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]\n        let path = documentsDirectoryPath.appending(filename)\n        let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0]]\n        let gifProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFDelayTime as String: 0.125]]\n        let cfURL = URL(fileURLWithPath: path) as CFURL\n        if let destination = CGImageDestinationCreateWithURL(cfURL, kUTTypeGIF, photos.count, nil) {\n            CGImageDestinationSetProperties(destination, fileProperties as CFDictionary?)\n            for photo in photos {\n                CGImageDestinationAddImage(destination, photo.cgImage!, gifProperties as CFDictionary?)\n            }\n            return CGImageDestinationFinalize(destination)\n        }\n        return false\n    }\n\/\/ EDIT: It has a Bool so you know you can safely use the file it creates.\n\n    if generateGif(arrayOfImages, \"\/myGIFfile.gif\") {\n        \/\/ do something with gif\n    } else {\n    \/\/ failed to create and close the gif file\n}",
+          "Date Modified" : "2021-08-27 14:28:24 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-08-27 11:15:28 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 14:50:45 +0100",
+      "Date Modified" : "2021-01-26 19:19:33 +0100",
+      "Folder" : "CoreData",
+      "Title" : "AppDelegate",
+      "Fragments" : [
+        {
+          "Content" : "import UIKit\nimport CoreData\n\n@UIApplicationMain\n\nclass AppDelegate: UIResponder, UIApplicationDelegate {\n\n    var window: UIWindow?\n    lazy var coreDataStack = CoreDataStack(modelName: \"NomDuProjet\")\n\n    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {\n\n        return true\n    }\n\n    func applicationDidEnterBackground(_ application: UIApplication) {\n        coreDataStack.saveContext()\n    }\n\n    func applicationWillTerminate(_ application: UIApplication) {\n        coreDataStack.saveContext()\n    }\n}",
+          "Date Modified" : "2021-01-26 14:50:45 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 14:50:45 +0100"
+        }
+      ],
+      "Tags" : [
+        "Data"
+      ]
+    },
+    {
+      "Date Created" : "2021-07-26 16:31:55 +0200",
+      "Date Modified" : "2021-07-26 16:32:14 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Animate template",
+      "Fragments" : [
+        {
+          "Content" : "   UIView.animate(withDuration: 0.5, delay: 1, usingSpringWithDamping:1, initialSpringVelocity: 0.5, options: .allowAnimatedContent, animations: {\n            \n        })",
+          "Date Modified" : "2021-07-26 16:32:14 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-07-26 16:31:55 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-07-22 17:23:25 +0200",
+      "Date Modified" : "2021-07-22 17:23:47 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Chercher l'index d'une donnée dans un tableau",
+      "Fragments" : [
+        {
+          "Content" : "let arr = [\"a\",\"b\",\"c\",\"a\"]\n\nlet indexOfA = arr.firstIndex(of: \"a\") \/\/ 0\nlet indexOfB = arr.lastIndex(of: \"a\") \/\/ 3",
+          "Date Modified" : "2021-07-22 17:23:41 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-07-22 17:23:25 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 14:45:49 +0100",
+      "Date Modified" : "2021-01-26 14:46:37 +0100",
+      "Folder" : "Cell",
+      "Title" : "Ajouter une Cell custom dans une tableView",
+      "Fragments" : [
+        {
+          "Content" : " \/\/— 💡 Allows you to assign the custom cell (XIB) to the desired tableView.\n    \n    \/\/ ATTENTION: Le fichier Xib et swift doit-être IDENTIQUE. \n    \n    \n    \/\/ identifié la source de la cell custom\nprivate func setupCustomCell() {\n    \/\/ elle viens d'ou ?\n    let nib = UINib(nibName: \"RecipeCelllTableViewCell\", bundle: nil)\n    \/\/ application de la celle personnalisé sur l'outel de la tableView grâce à son identifiant\n    tableViewSearchResult.register(nib, forCellReuseIdentifier: \"tableViewCell\")\n}",
+          "Date Modified" : "2021-08-20 20:04:08 +0200",
+          "Note" : "(!) Ne pas oublier de relier la tableView et la cell avec le DataSource et le delegate",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 14:45:49 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-10-21 23:48:57 +0200",
+      "Date Modified" : "2021-10-21 23:49:07 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "swift practice bar de mood",
+      "Fragments" : [
+        {
+          "Content" : "\/\/\n\/\/  ViewController.swift\n\/\/  Practice\n\/\/\n\/\/  Created by Maxime on 18\/10\/2021.\n\/\/\n\nimport UIKit\n\nclass ViewController: UIViewController {\n\n    @IBOutlet weak var progessView: UIProgressView!\n\n    @IBOutlet weak var stateLabel: UILabel!\n\n    var valueProgressBar = 0.0\n\n    override func viewDidLoad() {\n        super.viewDidLoad()\n        progessView.layer.masksToBounds = true\n        progessView.layer.cornerRadius = 50\n        progessView.contentMode = .scaleAspectFill\n        stateCondition()\n    }\n\n    @IBAction func lessButton(_ sender: Any) {\n        progessView.setProgress(Float(valueProgressBar), animated: true)\n        valueProgressBar -= 0.1\n\n        stateCondition()\n    }\n\n    @IBAction func moreButton(_ sender: Any) {\n\n        valueProgressBar += 0.1\n        progessView.setProgress(Float(valueProgressBar), animated: true)\n        stateCondition()\n    }\n\n    func stateCondition() {\n        switch progessView.progress {\n        case 0.1:\n            fontLabelState(label: stateLabel, ofSize: 20, smiley: \"😥\")\n        case 0.2:\n            fontLabelState(label: stateLabel, ofSize: 30, smiley: \"😓\")\n        case 0.3:\n            fontLabelState(label: stateLabel, ofSize: 40, smiley: \"😒\")\n        case 0.4:\n            fontLabelState(label: stateLabel, ofSize: 50, smiley: \"🙁\")\n        case 0.5:\n            fontLabelState(label: stateLabel, ofSize: 60, smiley: \"😐\")\n        case 0.6:\n            fontLabelState(label: stateLabel, ofSize: 70, smiley: \"🙂\")\n        case 0.7:\n            fontLabelState(label: stateLabel, ofSize: 80, smiley: \"😀\")\n        case 0.8:\n            fontLabelState(label: stateLabel, ofSize: 90, smiley: \"😁\")\n        case 0.9:\n            fontLabelState(label: stateLabel, ofSize: 100, smiley: \"🥳\")\n        case 1:\n            stateLabel.text =\n                \"🤩\"\n            stateLabel.font = UIFont.systemFont(ofSize: 130)\n        default: break\n        }\n\n    }\n\n    func fontLabelState(label: UILabel, ofSize: Int, smiley: String) {\n        label.text = smiley\n        label.font = UIFont.systemFont(ofSize: CGFloat(ofSize))\n    }\n\n}\n",
+          "Date Modified" : "2021-10-22 24:15:02 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-10-21 23:48:57 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-09-23 18:25:44 +0200",
+      "Date Modified" : "2021-09-23 18:26:16 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "CollectionView",
+      "Fragments" : [
+        {
+          "Content" : "https:\/\/medium.com\/swlh\/making-a-simple-photo-gallery-using-collectionviews-swift-5-7fae34a4eebf",
+          "Date Modified" : "2021-09-23 18:25:45 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Plain Text",
+          "Date Created" : "2021-09-23 18:25:44 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-03-09 16:00:38 +0100",
+      "Date Modified" : "2021-03-09 16:00:38 +0100",
+      "Folder" : "Animation",
+      "Title" : "Animate ",
+      "Fragments" : [
+        {
+          "Content" : "           UIView.animate(\n                   withDuration: 0.1,\n                   delay: 0.2 * Double(indexPath.row),\n                           animations: {\n                               taskCell.textViewAction.alpha = 0\n                           })",
+          "Date Modified" : "2021-03-09 16:00:38 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-03-09 16:00:38 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 18:19:10 +0100",
+      "Date Modified" : "2021-01-26 18:19:16 +0100",
+      "Folder" : "Appel Réseaux",
+      "Title" : "Encoder une URL proprement",
+      "Fragments" : [
+        {
+          "Content" : " private func encode(baseUrl: URL, with parameters: [(String, Any)]?) -> URL {\n            guard var urlComponents = URLComponents(url: baseUrl, resolvingAgainstBaseURL: false), let parameters = parameters, !parameters.isEmpty else { return baseUrl }\n            urlComponents.queryItems = [URLQueryItem]()\n            for (key, value) in parameters {\n                let queryItem = URLQueryItem(name: key, value: \"\\(value)\")\n                urlComponents.queryItems?.append(queryItem)\n            }\n            guard let url = urlComponents.url else { return baseUrl }\n            print(url)\n            return url\n        }",
+          "Date Modified" : "2021-01-26 18:19:19 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 18:19:10 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-03-13 23:43:20 +0100",
+      "Date Modified" : "2021-03-13 23:43:51 +0100",
+      "Folder" : "Uncategorized",
+      "Title" : "Empêcher conflit gesture et tableView",
+      "Fragments" : [
+        {
+          "Content" : "tapGestureOulet.cancelsTouchesInView = false",
+          "Date Modified" : "2021-03-13 23:43:32 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-03-13 23:43:20 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-05 14:59:21 +0100",
+      "Date Modified" : "2021-02-05 14:59:21 +0100",
+      "Folder" : "Visuel",
+      "Title" : "Dark mod",
+      "Fragments" : [
+        {
+          "Content" : " overrideUserInterfaceStyle = .dark",
+          "Date Modified" : "2021-02-05 14:59:21 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-05 14:59:21 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-08-25 21:36:39 +0200",
+      "Date Modified" : "2021-08-25 21:36:43 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Open url",
+      "Fragments" : [
+        {
+          "Content" : "guard let url = URL(string: \"http:\/\/www.google.com\") else {\n  return \/\/be safe\n}\n\nif #available(iOS 10.0, *) {\n    UIApplication.shared.open(url, options: [:], completionHandler: nil)\n} else {\n    UIApplication.shared.openURL(url)\n}",
+          "Date Modified" : "2021-08-25 21:36:47 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-08-25 21:36:39 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-09-07 15:16:34 +0200",
+      "Date Modified" : "2021-09-07 15:16:38 +0200",
+      "Folder" : "SWIFTUI",
+      "Title" : "font size",
+      "Fragments" : [
+        {
+          "Content" : ".font(Font.system(size: 20))",
+          "Date Modified" : "2021-09-07 15:16:43 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-09-07 15:16:34 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 14:14:39 +0100",
+      "Date Modified" : "2021-01-26 19:19:45 +0100",
+      "Folder" : "CoreData",
+      "Title" : "Using CoreData ViewController",
+      "Fragments" : [
+        {
+          "Content" : "  \n  Var coreDataManger : CoreDataManager?\n  \n  override func viewDidLoad() {\n        super.viewDidLoad()\n     \n        \/\/— ❗ Allows init and update CoreData \n        \n        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }\n        coreDataManager = CoreDataManager(coreDataStack: appDelegate.coreDataStack)\n        \n        \/\/X\n        \n    }",
+          "Date Modified" : "2021-06-24 12:10:45 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 14:14:39 +0100"
+        }
+      ],
+      "Tags" : [
+        "Data"
+      ]
+    },
+    {
+      "Date Created" : "2021-02-09 24:46:56 +0100",
+      "Date Modified" : "2021-02-09 24:47:18 +0100",
+      "Folder" : "Navigation",
+      "Title" : "Supprimer la ligne de séparation de la navigation bar",
+      "Fragments" : [
+        {
+          "Content" : "    \/\/— 💡 Supprimer la barre du haut\n        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)\n        self.navigationController?.navigationBar.shadowImage = UIImage()\n    \/\/X",
+          "Date Modified" : "2021-02-09 24:47:45 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-09 24:46:56 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-10-30 14:52:53 +0200",
+      "Date Modified" : "2021-11-09 09:34:36 +0100",
+      "Folder" : "Uncategorized",
+      "Title" : "Operateur ternaire",
+      "Fragments" : [
+        {
+          "Content" : "\/\/ .background(bool == valeur ? x : x )",
+          "Date Modified" : "2021-11-09 09:37:52 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-10-30 14:52:53 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 14:50:00 +0100",
+      "Date Modified" : "2021-01-26 14:50:00 +0100",
+      "Folder" : "Animation",
+      "Title" : "UIView Animate Exemple",
+      "Fragments" : [
+        {
+          "Content" : "    func animateTextFieldApparear(){\n        UIView.animateKeyframes(withDuration: 0.2, delay: 0, options:.calculationModeCubic , animations:{\n        \n            self.textField.isHidden = false\n            let translationMovement = CATransform3DTranslate(CATransform3DIdentity, 0, 10, 0)\n            \n            self.textField.layer.transform = translationMovement\n            \n        }){ _  in\n            UIView.animate(withDuration: 0.2) {\n            \n                self.textField.layer.transform = CATransform3DIdentity\n                \n                self.textField.alpha = 1\n                \n            }\n            \n        }\n    }",
+          "Date Modified" : "2021-01-26 18:36:41 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 14:50:00 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-09-06 18:00:58 +0200",
+      "Date Modified" : "2021-09-06 18:01:14 +0200",
+      "Folder" : "SWIFTUI",
+      "Title" : "custom bar title",
+      "Fragments" : [
+        {
+          "Content" : "\/\/ https:\/\/sarunw.com\/posts\/custom-navigation-bar-title-view-in-swiftui\/\n\n\nNavigationView { \/\/ <1>\n    Text(\"Hello, SwiftUI!\")\n        .navigationBarTitleDisplayMode(.inline)\n        .toolbar { \/\/ <2>\n            ToolbarItem(placement: .principal) { \/\/ <3>\n                VStack {\n                    Text(\"Title\").font(.headline)\n                    Text(\"Subtitle\").font(.subheadline)\n                }\n            }\n        }\n}\n\n\/\/ ATTENTION PROBLEM DAFFICHAGE AVEC CETTE METHODE\n\n\/\/ Cause : ToolBarItem\n\n",
+          "Date Modified" : "2021-09-07 17:42:23 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-09-06 18:00:58 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-27 12:03:28 +0100",
+      "Date Modified" : "2021-01-27 12:03:28 +0100",
+      "Folder" : "Divers",
+      "Title" : "Vérification des caractéres valides",
+      "Fragments" : [
+        {
+          "Content" : "extension String {\n    \n    var containsValidCharacter: Bool {\n        guard self != \"\" else { return true }\n        let hexSet = CharacterSet(charactersIn: \"abdcdefghijklmnopqrstuvwxyz\")\n        let newSet = CharacterSet(charactersIn: self)\n        return hexSet.isSuperset(of: newSet)\n    }\n}",
+          "Date Modified" : "2021-01-27 12:03:28 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-27 12:03:28 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-04-01 22:09:21 +0200",
+      "Date Modified" : "2021-04-01 22:11:48 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "User default",
+      "Fragments" : [
+        {
+          "Content" : "\/\/\n\/\/  SettingService.swift\n\/\/  Obj\n\/\/\n\/\/  Created by Maxime on 08\/12\/2020.\n\/\/  Copyright © 2020 Maxime. All rights reserved.\n\/\/\n\nimport Foundation\n\nclass SettingService {\n    \n    \/\/FOR DARK OR LIGHT MOD\n    private struct Keys {\n        static let mod = \"mod\"\n        static let boolNotification = \"boolNotification\"\n    }\n    \n    static var UserDefaultModBool: Bool {\n        get {\n            return (UserDefaults.standard.bool(forKey: Keys.mod))\n        }\n        set {\n        UserDefaults.standard.set(newValue, forKey: Keys.mod)\n        }\n    }\n    \n    \/\/For notifications: launched only once then repeated automatically\n    static var boolNotificationMod : Bool {\n        get {\n            return (UserDefaults.standard.bool(forKey: Keys.boolNotification))\n        }\n    }\n}\n\n\n\n\/\/ Ecrire des données\nfunc set(Any?, forKey: String) \/\/ Any doit être une Property List, sinon crash.\n\n\/\/ Lire des données\nfunc object(forKey: String) -> Any? \/\/ Any est forcément une Property List.",
+          "Date Modified" : "2021-04-01 22:11:34 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-04-01 22:09:21 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-04-01 10:57:41 +0200",
+      "Date Modified" : "2021-04-01 22:12:33 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Récupérer token",
+      "Fragments" : [
+        {
+          "Content" : "UIApplication.shared.registerForRemoteNotifications()\n\nfunc application(\n    _ application: UIApplication,\n    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data\n) {\n    let tokenParts = deviceToken.map { data in String(format: \"%02.2hhx\", data) }\n    let tokenJoigned = tokenParts.joined()\n    token = tokenJoigned\n    let bundleId = Bundle.main.bundleIdentifier!\n    print(\"Bundle ID \" + bundleId)\n}",
+          "Date Modified" : "2021-04-01 22:12:20 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-04-01 10:57:41 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-28 15:37:40 +0100",
+      "Date Modified" : "2021-01-28 15:38:15 +0100",
+      "Folder" : "Error",
+      "Title" : "Error",
+      "Fragments" : [
+        {
+          "Content" : "Thread 1: \"An NSManagedObject of class 'Reciplease.FavoriteRecipe' must have a valid NSEntityDescription.\"\n\nclass AppDelegate: UIResponder, UIApplicationDelegate {\n\n    var window: UIWindow?\n    lazy var coreDataStack = CoreDataStack(modelName: \"RecipleaseCoreData\")",
+          "Date Modified" : "2021-01-28 15:40:10 +0100",
+          "Note" : "Le nom du coreData d'AppDelegate n'est pas le même que celui du fichier",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-28 15:37:40 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-08-30 16:52:28 +0200",
+      "Date Modified" : "2021-08-30 16:53:04 +0200",
+      "Folder" : "SWIFTUI",
+      "Title" : "Créer un picker",
+      "Fragments" : [
+        {
+          "Content" : "@State private var selection = 0\nvar body: some View {\nNavigationView{\nForm {\nPicker( \"Choisir un pays\", selection: $selection)\nText(\"France\").tag(0)\nText(\"Italie\").tag(1)\nText(\"Allemagne\").tag(2)\nText(\"Espagne\").tag(3)\nText(\"Brésil\").tag(4)\n}.padding()\n.navigationBarTitle(\"Infos\"\")\n\n}\n}\n",
+          "Date Modified" : "2021-08-30 16:56:00 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-08-30 16:52:28 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-30 21:54:42 +0100",
+      "Date Modified" : "2021-01-30 21:57:15 +0100",
+      "Folder" : "AlamofireTest",
+      "Title" : "FakeYourNameSession",
+      "Fragments" : [
+        {
+          "Content" : "\nimport Foundation\nimport Alamofire\n@testable import YourProject\n\nstruct FakeResponse {\n    var response: HTTPURLResponse?\n    var data: Data?\n}\n\nfinal class FakeYourNameSession: AlamofireSessions {\n\n    \/\/ MARK: - Properties\n\n    private let fakeResponse: FakeResponse\n\n    \/\/ MARK: - Initializer\n\n    init(fakeResponse: FakeResponse) {\n        self.fakeResponse = fakeResponse\n    }\n\n    \/\/ MARK: - Methods\n\n    func request(url: URL, callback: @escaping (AFDataResponse<Any>) -> Void) {\n        let dataResponse = AFDataResponse<Any>(request: nil, response: fakeResponse.response, data: fakeResponse.data, metrics: nil, serializationDuration: 0, result: .success(\"OK\"))\n        callback(dataResponse)\n    }\n}\n",
+          "Date Modified" : "2021-01-30 21:55:29 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-30 21:54:42 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-03-02 21:10:50 +0100",
+      "Date Modified" : "2021-03-02 21:10:53 +0100",
+      "Folder" : "Divers",
+      "Title" : "GitHub",
+      "Fragments" : [
+        {
+          "Content" : "git push origin master --force",
+          "Date Modified" : "2021-03-02 21:11:25 +0100",
+          "Note" : "Forcer un push",
+          "Title" : "Fragment",
+          "Language" : "Plain Text",
+          "Date Created" : "2021-03-02 21:10:50 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 18:20:08 +0100",
+      "Date Modified" : "2021-01-26 18:20:15 +0100",
+      "Folder" : "Appel Réseaux",
+      "Title" : "Gérer les erreurs d'une requête",
+      "Fragments" : [
+        {
+          "Content" : "   enum RecipeError: Error, CustomStringConvertible {\n            \n            case noData, invalidResponse, undecodableData\n       \n        var description:String{\n            switch self {\n            case .noData:\n                return \"There is no data !\"\n            case .invalidResponse:\n                return \"Response status is incorrect !\"\n            case .undecodableData:\n                return \"Data can't be decoded !\"\n            }\n            \n        }\n            \n        }",
+          "Date Modified" : "2021-01-26 18:20:18 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 18:20:08 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-05 14:25:05 +0100",
+      "Date Modified" : "2021-02-05 14:25:05 +0100",
+      "Folder" : "Divers",
+      "Title" : "Bouton retour",
+      "Fragments" : [
+        {
+          "Content" : "navigationController?.popViewController(animated: true)",
+          "Date Modified" : "2021-07-27 16:33:01 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-05 14:25:05 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 18:38:10 +0100",
+      "Date Modified" : "2021-01-26 18:38:10 +0100",
+      "Folder" : "Visuel",
+      "Title" : "Changer le cornerRadius d'un objet",
+      "Fragments" : [
+        {
+          "Content" : "TonBouton.layer.cornerRadius = CGFloat(Int)\n\n\n\/\/ressources :https: \/\/ sarunw.com\/posts\/how-to-set-corner-radius-for-some-corners\/",
+          "Date Modified" : "2021-08-06 16:00:45 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 18:38:10 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-05-18 01:07:38 +0200",
+      "Date Modified" : "2021-05-18 01:07:48 +0200",
+      "Folder" : "Visuel",
+      "Title" : "Jouer son",
+      "Fragments" : [
+        {
+          "Content" : "    import AVFoundation\n    var audioPlayer: AVAudioPlayer?\n    \n    \n    let pathToSound = Bundle.main.path(forResource: \"ActionChecked\", ofTyp: \"mp3\")!\n        let url = URL(fileURLWithPath: pathToSound)\n        \n        do {\n            audioPlayer = try AVAudioPlayer(contentsOf: url)\n            audioPlayer?.play()\n        } catch {}",
+          "Date Modified" : "2021-05-18 01:08:28 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-05-18 01:07:38 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 14:01:38 +0100",
+      "Date Modified" : "2021-09-23 17:47:30 +0200",
+      "Folder" : "SWIFTUI",
+      "Title" : "CoreDataManager (SwiftUI)",
+      "Fragments" : [
+        {
+          "Content" : "\nimport Foundation\nimport CoreData\n\nclass CoreDataManager {\n\n    let persistentContainer: NSPersistentContainer\n\n    init() {\n        persistentContainer = NSPersistentContainer(name: \"PlantsParadise\")\n        persistentContainer.loadPersistentStores { (description, error) in\n            if let error = error {\n                fatalError(\"Core Data Store failed \\(error.localizedDescription)\")\n            }\n        }\n    }\n\n    func updatePlants() {\n\n        do {\n            try persistentContainer.viewContext.save()\n        } catch {\n            persistentContainer.viewContext.rollback()\n        }\n    }\n\n    func deletePlants(movie: Plants) {\n\n        persistentContainer.viewContext.delete(movie)\n\n        do {\n            try persistentContainer.viewContext.save()\n        } catch {\n            persistentContainer.viewContext.rollback()\n            print(\"Failed to save context \\(error)\")\n        }\n    }\n\n    func getAllPlants() -> [Plants] {\n\n        let fetchRequest: NSFetchRequest<Plants> = Plants.fetchRequest()\n\n        do {\n            return try persistentContainer.viewContext.fetch(fetchRequest)\n        } catch {\n            return []\n        }\n    }\n\n    func savePlants(name: String) {\n\n        let plants = Plants(context: persistentContainer.viewContext)\n        plants.name = name\n\n        do {\n            try persistentContainer.viewContext.save()\n        } catch {\n            print(\"Failed to save movie \\(error)\")\n        }\n\n    }\n\n}\n",
+          "Date Modified" : "2021-09-15 17:38:34 +0200",
+          "Note" : "Template",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 14:01:38 +0100"
+        }
+      ],
+      "Tags" : [
+        "Data",
+        "swiftUI"
+      ]
+    },
+    {
+      "Date Created" : "2021-09-07 15:00:12 +0200",
+      "Date Modified" : "2021-09-07 15:00:16 +0200",
+      "Folder" : "SWIFTUI",
+      "Title" : "font perso",
+      "Fragments" : [
+        {
+          "Content" : " \/\/ drag and drop police then \n \n Text(\"Plants Paradise\") .font(Font.custom(\"Didot\",size:18))",
+          "Date Modified" : "2021-09-07 15:01:25 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-09-07 15:00:12 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 18:20:50 +0100",
+      "Date Modified" : "2021-01-26 18:27:08 +0100",
+      "Folder" : "Appel Réseaux",
+      "Title" : "Request (Alamofire)",
+      "Fragments" : [
+        {
+          "Content" : "import Foundation\nimport Alamofire\n\nprotocol AlamofireSessions {\n    func request(url: URL, callback: @escaping (AFDataResponse<Any>) -> Void)\n}\n\nfinal class RecipeSearchSession: AlamofireSessions {\n    func request(url: URL, callback: @escaping (AFDataResponse<Any>) -> Void) { AF.request(url).responseJSON { DataResponse\n            in\n        callback(DataResponse)\n    }\n\n    }\n\n}",
+          "Date Modified" : "2021-01-26 18:22:38 +0100",
+          "Note" : "Requête avec Alamofire",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 18:20:50 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-09-11 14:49:21 +0200",
+      "Date Modified" : "2021-09-11 14:49:46 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Ajouter mail natif",
+      "Fragments" : [
+        {
+          "Content" : "import MessageUI\n\n\nextension ProfilViewController: MFMailComposeViewControllerDelegate {\nfunc sendEmail() {\nif MFMailComposeViewController.canSendMail() {\nlet mail = MFMailComposeViewController()\nmail.mailComposeDelegate = self\nmail.setToRecipients([\"gaffeJonathan@ymail.com\"])\nmail.setMessageBody(\"<p>Bonjour, comment pouvons-nous vous aider ?<\/p>\", isHTML: true)\n\npresent(mail, animated: true)\n} else { presentAlert(title: \"Oups\", message: \"Une erreur est survenue\", actionTitle: \"OK\") }\n}\n\nfunc mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {\ncontroller.dismiss(animated: true)\n}\n}\n\n",
+          "Date Modified" : "2021-09-11 14:49:38 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-09-11 14:49:21 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-23 14:45:31 +0100",
+      "Date Modified" : "2021-02-23 14:45:31 +0100",
+      "Folder" : "Divers",
+      "Title" : "Slider",
+      "Fragments" : [
+        {
+          "Content" : "@IBAction func touchSlider(_ sender: Any) {\n    noteLabel.text = String(Int(noteSlider.value))\n}",
+          "Date Modified" : "2021-02-23 14:45:31 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-23 14:45:31 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-06-08 22:00:29 +0200",
+      "Date Modified" : "2021-06-08 22:00:42 +0200",
+      "Folder" : "RSS",
+      "Title" : "XmlParserManager",
+      "Fragments" : [
+        {
+          "Content" : "\n\nimport Foundation\n\nclass XmlParserManager: NSObject, XMLParserDelegate {\n    \n    var parser = XMLParser()\n    var feeds = NSMutableArray()\n    var elements = NSMutableDictionary()\n    var element = NSString()\n    var ftitle = NSMutableString()\n    var link = NSMutableString()\n    var img:  [AnyObject] = []\n    var fdescription = NSMutableString()\n    var fdate = NSMutableString()\n    \n    \/\/ initilise parser\n    func initWithURL(_ url :URL) -> AnyObject {\n        startParse(url)\n        return self\n    }\n    \n    func startParse(_ url :URL) {\n        feeds = []\n        parser = XMLParser(contentsOf: url)!\n        parser.delegate = self\n        parser.shouldProcessNamespaces = false\n        parser.shouldReportNamespacePrefixes = false\n        parser.shouldResolveExternalEntities = false\n        parser.parse()\n    }\n    \n    func allFeeds() -> NSMutableArray {\n        return feeds\n    }\n    \n    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {\n        element = elementName as NSString\n        if (element as NSString).isEqual(to: \"item\") {\n            elements =  NSMutableDictionary()\n            elements = [:]\n            ftitle = NSMutableString()\n            ftitle = \"\"\n            link = NSMutableString()\n            link = \"\"\n            fdescription = NSMutableString()\n            fdescription = \"\"\n            fdate = NSMutableString()\n            fdate = \"\"\n        } else if (element as NSString).isEqual(to: \"enclosure\") {\n            if let urlString = attributeDict[\"url\"] {\n                img.append(urlString as AnyObject)\n            }\n        }\n    }\n    \n    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {\n\n        if (elementName as NSString).isEqual(to: \"item\") {\n            if ftitle != \"\" {\n                elements.setObject(ftitle, forKey: \"title\" as NSCopying)\n            }\n            if link != \"\" {\n                elements.setObject(link, forKey: \"link\" as NSCopying)\n            }\n            if fdescription != \"\" {\n                elements.setObject(fdescription, forKey: \"description\" as NSCopying)\n            }\n            if fdate != \"\" {\n                elements.setObject(fdate, forKey: \"pubDate\" as NSCopying)\n            }\n            feeds.add(elements)\n        }\n    }\n    \n    func parser(_ parser: XMLParser, foundCharacters string: String) {\n        if element.isEqual(to: \"title\") {\n            ftitle.append(string)\n        } else if element.isEqual(to: \"link\") {\n            link.append(string)\n        } else if element.isEqual(to: \"description\") {\n            fdescription.append(string)\n        } else if element.isEqual(to: \"pubDate\") {\n            fdate.append(string)\n        }\n    }\n}\n",
+          "Date Modified" : "2021-06-08 22:01:08 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-06-08 22:00:29 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-27 17:29:40 +0100",
+      "Date Modified" : "2021-01-27 17:32:39 +0100",
+      "Folder" : "Uncategorized",
+      "Title" : "NSpredicate (Empty Bool)",
+      "Fragments" : [
+        {
+          "Content" : "    func isRecipeRegistered(name:String) -> Bool {\n        \n        let request: NSFetchRequest<FavoriteRecipe> = FavoriteRecipe.fetchRequest()\n        request.predicate = NSPredicate(format: \"label == %@\", name)\n        guard let favorites = try? managedObjectContext.fetch(request) else { return false }\n        if favorites.isEmpty { return false }\n        return true\n    }",
+          "Date Modified" : "2021-02-09 24:49:34 +0100",
+          "Note" : "Comparer deux éléments dans un tableau",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-27 17:29:40 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-17 18:23:50 +0100",
+      "Date Modified" : "2021-02-17 18:23:50 +0100",
+      "Folder" : "Divers",
+      "Title" : "Créer et utiliser un calendrier",
+      "Fragments" : [
+        {
+          "Content" : "\/\/ Utilisation de la librairie FSCalendar\n\/\/ view > class FSCalendar\n\/\/ relier au delegate et dataSource\n\n\/\/EDIT : Ajout d'un exemple de code\n\nclass RefreshManager: NSObject {\n\n    static let shared = RefreshManager()\n    private let defaults = UserDefaults.standard\n    private let defaultsKey = \"lastRefresh\"\n    private let calender = Calendar.current\n\n    func loadDataIfNeeded(completion: (Bool) -> Void) {\n\n        if isRefreshRequired() {\n            \/\/ load the data\n            defaults.set(Date(), forKey: defaultsKey)\n            completion(true)\n        } else {\n            completion(false)\n        }\n    }\n\n    private func isRefreshRequired() -> Bool {\n\n        guard let lastRefreshDate = defaults.object(forKey: defaultsKey) as? Date else {\n            return true\n        }\n\n        if let diff = calender.dateComponents([.hour], from: lastRefreshDate, to: Date()).hour, diff > 24 {\n            return true\n        } else {\n            return false\n        }\n    }\n}\n\n\n\/\/****\n\n\/\/ EDIT 2 : Heure sélectionnable par l'utilisateur\n\nprivate func isRefreshRequired(userPickedHour: Int = 16) -> Bool {\n\n    guard let lastRefreshDate = defaults.object(forKey: defaultsKey) as? Date else {\n        return true\n    }\n\n    if let diff = calender.dateComponents([.hour], from: lastRefreshDate, to: Date()).hour,\n        let currentHour =  calender.dateComponents([.hour], from: Date()).hour,\n        diff >= 24, userPickedHour <= currentHour {\n        return true\n    } else {\n        return false\n    }\n}  \n\/\/ Dans cette fonction isRefreshRequired modifiée, vous pouvez passer une valeur pour l'heure et voir si cela fait au moins 24 heures que l'heure a été la dernière actualisation et que l'heure actuelle est ou est supérieure à l'heure sélectionnée par les utilisateurs.\n\n\/\/ Cela ne signifie pas qu'il s'exécutera par exemple exactement 16h00 d'ailleurs. Il s'exécutera lorsque l'utilisateur chargera cet écran et que les règles passeront (min 24 heures écoulées, currentHour est >= userSelected hour)\n\n\/\/ EDIT 3: comment appeler\n\nclass ViewController: UIViewController {\n\n    let refreshManager = RefreshManager.shared\n\n    override func viewDidLoad() {\n        super.viewDidLoad()\n\n        refreshManager.loadDataIfNeeded() { success in\n            print(success)\n        }\n    }\n}\n\/\/ EDIT: Changement de logique\n\nif let diff = calender.dateComponents([.day], from: lastRefreshDate, to: Date()).day,\n    let currentHour = calender.dateComponents([.hour], from: Date()).hour,\n    diff >= 1, userPickedHour <= currentHour {\n    return true\n} else {\n    return false\n}\n\n",
+          "Date Modified" : "2021-02-17 18:23:50 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-17 18:23:50 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-06-08 22:00:51 +0200",
+      "Date Modified" : "2021-06-08 22:01:03 +0200",
+      "Folder" : "RSS",
+      "Title" : "FeedListViewController",
+      "Fragments" : [
+        {
+          "Content" : "podjj\n\nimport UIKit\n\nclass FeedListViewController: UITableViewController, XMLParserDelegate {\n\n    var myFeed : NSArray = []\n    var feedImgs: [AnyObject] = []\n    var url: URL!\n\n    override func viewDidLoad() {\n        super.viewDidLoad()\n\n        tableView.rowHeight = UITableView.automaticDimension\n        tableView.estimatedRowHeight = 140\n        tableView.backgroundColor = UIColorFromRGB(rgbValue: 0xdf4926)\n        self.tableView.dataSource = self\n        self.tableView.delegate = self\n\n        loadData()\n    }\n\n    @IBAction func refreshFeed(_ sender: Any) {\n\n        loadData()\n    }\n\n    func loadData() {\n        url = URL(string: \"https:\/\/anchor.fm\/s\/2cf6f898\/podcast\/rss\")!\n        loadRss(url);\n    }\n\n    func loadRss(_ data: URL) {\n\n        \/\/ XmlParserManager instance\/object\/variable.\n        let myParser : XmlParserManager = XmlParserManager().initWithURL(data) as! XmlParserManager\n\n        \/\/ Put feed in array.\n        feedImgs = myParser.img as [AnyObject]\n        myFeed = myParser.feeds\n        tableView.reloadData()\n    }\n\n    override func didReceiveMemoryWarning() {\n        super.didReceiveMemoryWarning()\n    }\n\n    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {\n        if segue.identifier == \"openPage\" {\n            let indexPath: IndexPath = self.tableView.indexPathForSelectedRow!\n            let selectedFURL: String = (myFeed[indexPath.row] as AnyObject).object(forKey: \"link\") as! String\n\n            \/\/ Instance of our feedpageviewcontrolelr.\n            let fivc: FeedItemWebViewController = segue.destination as! FeedItemWebViewController\n            fivc.selectedFeedURL = selectedFURL as String\n        }\n    }\n\n    \/\/ MARK: - Table view data source.\n    override func numberOfSections(in tableView: UITableView) -> Int {\n        return 1\n    }\n\n    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {\n        return myFeed.count\n    }\n\n    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {\n        let cell = tableView.dequeueReusableCell(withIdentifier: \"Cell\", for: indexPath)\n        cell.textLabel?.backgroundColor = UIColor.clear\n        cell.detailTextLabel?.backgroundColor = UIColor.clear\n\n        if indexPath.row % 2 == 0 {\n            cell.backgroundColor = UIColor(white: 1, alpha: 0)\n        } else {\n            cell.backgroundColor = UIColor(white: 1, alpha: 0.1)\n        }\n\n        \/\/ Load feed iamge.\n        let url = NSURL(string:feedImgs[indexPath.row] as! String)\n        let data = NSData(contentsOf:url! as URL)\n        var image = UIImage(data:data! as Data)\nlet imageDefault = UIImage()\n        image = resizeImage(image: image ?? imageDefault , toTheSize: CGSize(width: 70, height: 70))\n\n        let cellImageLayer: CALayer?  = cell.imageView?.layer\n\n        cellImageLayer!.cornerRadius = 35\n        cellImageLayer!.masksToBounds = true\n\n        cell.imageView?.image = image\n        cell.textLabel?.text = (myFeed.object(at: indexPath.row) as AnyObject).object(forKey: \"title\") as? String\n        cell.textLabel?.textColor = UIColor.white\n        cell.textLabel?.numberOfLines = 0\n        cell.textLabel?.lineBreakMode = .byWordWrapping\n        cell.detailTextLabel?.text = (myFeed.object(at: indexPath.row) as AnyObject).object(forKey: \"pubDate\") as? String\n        cell.detailTextLabel?.textColor = UIColor.white\n\n        return cell\n    }\n\n    func UIColorFromRGB(rgbValue: UInt) -> UIColor {\n        return UIColor(\n            red: CGFloat((rgbValue & 0xFF0000) >> 16) \/ 255.0,\n            green: CGFloat((rgbValue & 0x00FF00) >> 8) \/ 255.0,\n            blue: CGFloat(rgbValue & 0x0000FF) \/ 255.0,\n            alpha: CGFloat(1.0)\n        )\n    }\n\n    func resizeImage(image:UIImage, toTheSize size:CGSize)->UIImage{\n\n        let scale = CGFloat(max(size.width\/image.size.width,\n                                size.height\/image.size.height))\n        let width:CGFloat  = image.size.width * scale\n        let height:CGFloat = image.size.height * scale;\n\n        let rr:CGRect = CGRect(x: 0, y: 0, width: width, height: height)\n\n        UIGraphicsBeginImageContextWithOptions(size, false, 0);\n        image.draw(in: rr)\n        let newImage = UIGraphicsGetImageFromCurrentImageContext()\n        UIGraphicsEndImageContext();\n        return newImage!\n    }\n}\n",
+          "Date Modified" : "2021-06-11 20:05:02 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-06-08 22:00:51 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-03 14:52:03 +0100",
+      "Date Modified" : "2021-02-03 14:52:21 +0100",
+      "Folder" : "Uncategorized",
+      "Title" : "Trier un tableau",
+      "Fragments" : [
+        {
+          "Content" : "request.sortDescriptors = [NSSortDescriptor(key: \"name\", ascending: true)]",
+          "Date Modified" : "2021-02-03 14:53:22 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-03 14:52:03 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-03-01 01:52:52 +0100",
+      "Date Modified" : "2021-03-01 01:52:52 +0100",
+      "Folder" : "Uncategorized",
+      "Title" : "Changer ordre cell (Swap)",
+      "Fragments" : [
+        {
+          "Content" : " taskCell.showsReorderControl = true\n \n func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {\n\n    var name = coreDataManager?.homeTasks\n\n    name?.swapAt(sourceIndexPath.row, destinationIndexPath.row)\n\n}",
+          "Date Modified" : "2021-03-01 01:52:52 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-03-01 01:52:52 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-06-23 11:35:02 +0200",
+      "Date Modified" : "2021-06-23 11:35:14 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Appareil photo",
+      "Fragments" : [
+        {
+          "Content" : "   @IBAction func didTapButton(_ sender: Any) {\n        let picker = UIImagePickerController()\n        picker.sourceType = .camera\n        picker.delegate = self\n        present(picker, animated: true)\n    }\n    \n}\n\n\nextension AddPlayerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {\n\n    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {\n        picker.dismiss(animated: true, completion: nil)\n    }\n\n    func imagePickerController(_ picker: UIImagePickerController,\n                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {\n\n        picker.dismiss(animated: true, completion: nil)\n\n        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {\n            return\n        }\n\n        addPictureButton.setBackgroundImage(image, for: .normal)\n\n    }\n}\n",
+          "Date Modified" : "2021-06-23 12:48:33 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-06-23 11:35:02 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 14:45:12 +0100",
+      "Date Modified" : "2021-01-26 14:45:31 +0100",
+      "Folder" : "Cell",
+      "Title" : "Spécifier la hauteur de la Cell d'une TableView",
+      "Fragments" : [
+        {
+          "Content" : "\/\/— 💡 Specifies the height of the cell images\n\nfunc tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {\n    return tableView.frame.height \/ 2\n}",
+          "Date Modified" : "2021-01-26 14:45:17 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 14:45:12 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-07-31 16:24:26 +0200",
+      "Date Modified" : "2021-07-31 16:24:36 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Dissmiss view",
+      "Fragments" : [
+        {
+          "Content" : "dismiss(animated: true, completion: nil)",
+          "Date Modified" : "2021-07-31 16:24:43 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-07-31 16:24:26 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 19:17:19 +0100",
+      "Date Modified" : "2021-01-26 19:19:12 +0100",
+      "Folder" : "Uncategorized",
+      "Title" : "Convertir une image en data (et vice versa)",
+      "Fragments" : [
+        {
+          "Content" : "\/\/ Swift4\nlet image = UIImage(named: \"sample\")\nlet data = image?.pngData()\nlet data = image?.jpegData(compressionQuality: 0.9)\nlet uiImage: UIImage = UIImage(data: imageData)",
+          "Date Modified" : "2021-01-26 19:18:00 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 19:17:19 +0100"
+        }
+      ],
+      "Tags" : [
+        "UIImage",
+        "Data"
+      ]
+    },
+    {
+      "Date Created" : "2021-02-08 23:17:13 +0100",
+      "Date Modified" : "2021-02-08 23:18:30 +0100",
+      "Folder" : "Tableau",
+      "Title" : "[Boucle For in] Déballer un tableau contenant un type optionnel",
+      "Fragments" : [
+        {
+          "Content" : "let objActionArray = tasksObjIndexPath?.actions ?? [String]()\n        \nfor actionArray in 0...(objActionArray.count)  {\n            \n        }\n        \n        \n\n\/\/Rappel : For in basique\n        \n        let names = [\"Anna\", \"Alex\", \"Brian\", \"Jack\"]\nfor name in names {\n    print(\"Hello, \\(name)!\")\n}\n\/\/ Hello, Anna!\n\/\/ Hello, Alex!\n\/\/ Hello, Brian!\n\/\/ Hello, Jack!",
+          "Date Modified" : "2021-05-15 19:07:08 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-08 23:17:13 +0100"
+        }
+      ],
+      "Tags" : [
+        "Array"
+      ]
+    },
+    {
+      "Date Created" : "2021-02-16 11:34:11 +0100",
+      "Date Modified" : "2021-02-16 11:34:11 +0100",
+      "Folder" : "Uncategorized",
+      "Title" : "Convertir Date en String",
+      "Fragments" : [
+        {
+          "Content" : "\/\/ Create Date\nlet date = Date()\n\n\/\/ Create Date Formatter\nlet dateFormatter = DateFormatter()\n\ndate.dateFormat = \"yyyy-MM-dd hh:mm:ss\"\n\n\/\/ Convert Date to String\ndateFormatter.string(from: date)\n\n\nlet df = DateFormatter()\n\ndate.dateFormat = \"yyyy-MM-dd hh:mm:ss\"\n\nlet now = df.string(from: Date())\n\n\n\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\n\n\n\/\/ Create Date\nlet date = Date()\n\n\/\/ Create Date Formatter\nlet dateFormatter = DateFormatter()\ndateFormatter.locale = Locale(identifier: \"fr\")\n\ndateFormatter.dateFormat = \"dd MMM yyyy\"\n\n\/\/ Convert Date to String\nlet dateFormated = dateFormatter.string(from: date)",
+          "Date Modified" : "2021-02-20 01:15:11 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-16 11:34:11 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 14:23:36 +0100",
+      "Date Modified" : "2021-01-26 14:23:49 +0100",
+      "Folder" : "Segues",
+      "Title" : "Lancer le Segue",
+      "Fragments" : [
+        {
+          "Content" : "  self.performSegue(withIdentifier: \"IDduSegue\", sender: (Any).self)",
+          "Date Modified" : "2021-01-26 14:24:15 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 14:23:36 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-30 21:52:05 +0100",
+      "Date Modified" : "2021-01-30 21:56:03 +0100",
+      "Folder" : "AlamofireTest",
+      "Title" : "RequestServiceTest",
+      "Fragments" : [
+        {
+          "Content" : "\nimport XCTest\n@testable import YourProject\n\nclass RequestServiceTests: XCTestCase {\n    \n    func testGetData_WhenNoDataIsPassed_ThenShouldReturnFailedCallback() {\n        let session = FakeITunesSession(fakeResponse: FakeResponse(response: nil, data: nil))\n        \n        let requestService = RequestService(session: session as AlamofireSessions)\n        \n        let expectation = XCTestExpectation(description: \"Wait for queue change.\")\n        \n        \/\/Changing here \n        \n        requestService.getData (food: \"sushi\"){ result in\n            guard case .failure(let error) = result else {\n                XCTFail(\"Test getData method with no data failed.\")\n                return\n            }\n            XCTAssertNotNil(error)\n            expectation.fulfill()\n        }\n        wait(for: [expectation], timeout: 0.01)\n    }\n    \n    func testGetData_WhenIncorrectResponseIsPassed_ThenShouldReturnFailedCallback() {\n        let session = FakeITunesSession(fakeResponse: FakeResponse(response: FakeResponseData.responseKO, data: FakeResponseData.correctData))\n        \n        let requestService = RequestService(session: session as AlamofireSessions)\n        \n        let expectation = XCTestExpectation(description: \"Wait for queue change.\")\n        \n        \/\/ Changing here\n        \n        requestService.getData(food: \"chicken\") { result in\n            guard case .failure(let error) = result else {\n                XCTFail(\"Test getData method with incorrect response failed.\")\n                return\n            }\n            XCTAssertNotNil(error)\n            expectation.fulfill()\n        }\n        wait(for: [expectation], timeout: 0.01)\n    }\n    \n    func testGetData_WhenUndecodableDataIsPassed_ThenShouldReturnFailedCallback() {\n        let session = FakeITunesSession(fakeResponse: FakeResponse(response: FakeResponseData.responseOK, data: FakeResponseData.incorrectData))\n        let requestService = RequestService(session: session as AlamofireSessions)\n        let expectation = XCTestExpectation(description: \"Wait for queue change.\")\n        \n       \/\/ Changing here\n        \n        requestService.getData(food: \"chicken\") { result in\n            guard case .failure(let error) = result else {\n                XCTFail(\"Test getData method with undecodable data failed.\")\n                return\n            }\n            XCTAssertNotNil(error)\n            expectation.fulfill()\n        }\n        wait(for: [expectation], timeout: 0.01)\n    }\n    \n    func testGetData_WhenCorrectDataIsPassed_ThenShouldReturnSuccededCallback() {\n        let session = FakeITunesSession(fakeResponse: FakeResponse(response: FakeResponseData.responseOK, data: FakeResponseData.correctData))\n        \n        let requestService = RequestService(session: session as AlamofireSessions)\n        \n        let expectation = XCTestExpectation(description: \"Wait for queue change.\")\n        \n        \/\/ Changing here\n            \n            requestService.getData(food:\"chicken\") { result in\n            guard case .success(let data) = result else {\n                XCTFail(\"Test getData method with correct data failed.\")\n                return\n            }\n            XCTAssertTrue(data.hits[0].recipe.label  == \"Chicken Paprikash\")\n            expectation.fulfill()\n        }\n        wait(for: [expectation], timeout: 0.01)\n    }\n}\n",
+          "Date Modified" : "2021-01-30 21:59:48 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-30 21:52:05 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-06-23 14:48:26 +0200",
+      "Date Modified" : "2021-06-23 14:48:41 +0200",
+      "Folder" : "Visuel",
+      "Title" : "Image adapation",
+      "Fragments" : [
+        {
+          "Content" : "ImageButton.setImage(image, for: .normal)\nImageButton.imageView?.contentMode = .scaleAspectFill",
+          "Date Modified" : "2021-09-23 17:15:50 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-06-23 14:48:26 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-09 24:49:02 +0100",
+      "Date Modified" : "2021-02-09 24:49:07 +0100",
+      "Folder" : "Navigation",
+      "Title" : "Changer titre navitation bar",
+      "Fragments" : [
+        {
+          "Content" : " @IBOutlet weak var navItem: UINavigationItem!\n \n navItem.title = \"ANY TITLE\"",
+          "Date Modified" : "2021-02-09 24:49:18 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-09 24:49:02 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-08-06 19:15:32 +0200",
+      "Date Modified" : "2021-08-06 19:16:20 +0200",
+      "Folder" : "Tableau",
+      "Title" : "inversé ordre array (pour tableview)",
+      "Fragments" : [
+        {
+          "Content" : "\n        var historical = [String]()\n        \n        \n        \n        for historicalOri in coreDataManager!.game.first?.historical ?? [String]() {\n            historical.append(historicalOri)\n        }\n        \n        historical.reverse()\n        \n        TaCell.textLabel?.text = historical[indexPath.row]",
+          "Date Modified" : "2021-08-06 19:16:32 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-08-06 19:15:32 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-04-01 22:14:04 +0200",
+      "Date Modified" : "2021-04-01 22:14:44 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Info Statut Bar Bool",
+      "Fragments" : [
+        {
+          "Content" : "override var prefersStatusBarHidden: Bool {\n        return true\n    }",
+          "Date Modified" : "2021-04-01 22:14:20 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-04-01 22:14:04 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-05 14:53:39 +0100",
+      "Date Modified" : "2021-02-05 14:53:39 +0100",
+      "Folder" : "Animation",
+      "Title" : "TextField Apparition",
+      "Fragments" : [
+        {
+          "Content" : "    func animateTextFieldApparear(){\n        UIView.animateKeyframes(withDuration: 0.2, delay: 0, options:.calculationModeCubic , animations:{\n            self.textFieldForAddTask.isHidden = false\n            let translationMovement = CATransform3DTranslate(CATransform3DIdentity, 0, 10, 0)\n            self.textFieldForAddTask.layer.transform = translationMovement\n            \n        }){ _  in\n            UIView.animate(withDuration: 0.2) {\n                self.textFieldForAddTask.layer.transform = CATransform3DIdentity\n                self.textFieldForAddTask.alpha = 1\n                \n            }\n            \n        }\n    }",
+          "Date Modified" : "2021-02-05 14:53:39 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-05 14:53:39 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 14:22:57 +0100",
+      "Date Modified" : "2021-01-26 19:20:45 +0100",
+      "Folder" : "Segues",
+      "Title" : "Passage de donnée entre segues",
+      "Fragments" : [
+        {
+          "Content" : "   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {\n        if let recipesVC = segue.destination as? NomDeTonController {\n            recipesVC.NomDeVariableDuController = NomDeTaVariableSelfController\n        }\n    }\n}",
+          "Date Modified" : "2021-01-26 14:22:57 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 14:22:57 +0100"
+        }
+      ],
+      "Tags" : [
+        "Data"
+      ]
+    },
+    {
+      "Date Created" : "2021-07-03 17:57:39 +0200",
+      "Date Modified" : "2021-07-03 17:57:52 +0200",
+      "Folder" : "Tableau",
+      "Title" : "Fusionner deux dictionnaires",
+      "Fragments" : [
+        {
+          "Content" : "var d1 = [\"a\": \"b\"]\nvar d2 = [\"c\": \"e\"]\n\nextension Dictionary {\n    mutating func merge(dict: [Key: Value]){\n        for (k, v) in dict {\n            updateValue(v, forKey: k)\n        }\n    }\n}\n\nd1.merge(d2)",
+          "Date Modified" : "2021-07-03 17:57:58 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-07-03 17:57:39 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-08-30 16:17:57 +0200",
+      "Date Modified" : "2021-08-30 16:18:06 +0200",
+      "Folder" : "SWIFTUI",
+      "Title" : "image circle",
+      "Fragments" : [
+        {
+          "Content" : ".clipShape(Circle())",
+          "Date Modified" : "2021-08-30 16:18:22 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-08-30 16:17:57 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-08-13 16:38:26 +0200",
+      "Date Modified" : "2021-08-13 16:38:59 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "local language",
+      "Fragments" : [
+        {
+          "Content" : "genstrings -o en.lproj Views\/*.swift Model\/*.swift",
+          "Date Modified" : "2021-08-13 16:58:41 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Plain Text",
+          "Date Created" : "2021-08-13 16:38:26 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-08-17 12:52:41 +0200",
+      "Date Modified" : "2021-08-17 12:52:47 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Exporter un PDF",
+      "Fragments" : [
+        {
+          "Content" : "https:\/\/www.raywenderlich.com\/4023941-creating-a-pdf-in-swift-with-pdfkit#toc-anchor-012",
+          "Date Modified" : "2021-08-17 12:52:47 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Plain Text",
+          "Date Created" : "2021-08-17 12:52:41 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-03-25 01:55:51 +0100",
+      "Date Modified" : "2021-03-25 01:56:49 +0100",
+      "Folder" : "TableView",
+      "Title" : "UITableView sections example",
+      "Fragments" : [
+        {
+          "Content" : "import UIKit\nclass ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {\n@IBOutlet var tableView: UITableView!\nvar itemsInSections: Array<Array<String>> = [[\"1A\", \"1B\", \"1C\"], [\"2A\", \"2B\"], [\"3A\", \"3B\", \"3C\", \"3D\", \"3E\"]]\nvar sections: Array<String> = [\"Section 1\", \"Section 2\", \"Section 3\"]\noverride func viewDidLoad() {\nsuper.viewDidLoad()\nself.tableView.dataSource = self\nself.tableView.delegate = self\n    }\nfunc numberOfSectionsInTableView(tableView: UITableView) -> Int {\nreturn self.sections.count\n    }\nfunc tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {\nreturn self.itemsInSections[section].count\n    }\nfunc tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {\nreturn self.sections[section]\n    }\nfunc tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {\nvar cell = tableView.dequeueReusableCellWithIdentifier(\"cell\") as UITableViewCell\nvar text = self.itemsInSections[indexPath.section][indexPath.row]\n        cell.textLabel!.text = text\nreturn cell\n    }\n}",
+          "Date Modified" : "2021-03-25 01:55:57 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-03-25 01:55:51 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 18:42:04 +0100",
+      "Date Modified" : "2021-01-26 18:42:16 +0100",
+      "Folder" : "Uncategorized",
+      "Title" : "Template Order",
+      "Fragments" : [
+        {
+          "Content" : "\n\/\/MARK: - Outlet 🔗\n\n\/\/MARK: - Properties 📦\n\n\/\/MARK: - View Cycle ♻️\n\n\/\/MARK:- Button Action 🔴\n\n\/\/MARK:- override 🧗\n\n\/\/MARK:- Conditions☝🏻\n\n\/\/MARK:- Interface Gestion 📱\n\n\/\/MARK:- Others Func 🍱\n\n\/\/MARK:- KeyBoard Gestion ⌨️\n\n\/\/MARK:- Animate ⚡️\n\n\/\/MARK:- Extension ↔️",
+          "Date Modified" : "2021-10-04 11:00:36 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Plain Text",
+          "Date Created" : "2021-01-26 18:42:04 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-08-17 20:42:31 +0200",
+      "Date Modified" : "2021-08-17 20:42:38 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Supprimer cell",
+      "Fragments" : [
+        {
+          "Content" : "    func deleteChallengeCustom(indexPathRow:Int){\n        let challenge = challenges[indexPathRow]\n        managedObjectContext.delete(challenge)\n    }",
+          "Date Modified" : "2021-08-17 20:42:39 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Plain Text",
+          "Date Created" : "2021-08-17 20:42:31 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-09 16:36:51 +0100",
+      "Date Modified" : "2021-02-09 16:37:01 +0100",
+      "Folder" : "Uncategorized",
+      "Title" : "Relationship",
+      "Fragments" : [
+        {
+          "Content" : "\/\/ Editor > create NSManageobject subclass\n\n\/\/Exemple\nfunc relationshipDemo() {\n\nlet family = Family(context : context)\n  let family.name = \"abc family\"  \n  \n  let person = Person(context: context)\n  person.name = \"Maggie\"\n  \n  family.addPeople(person)\n    \n}",
+          "Date Modified" : "2021-02-09 17:14:27 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-09 16:36:51 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-27 12:14:09 +0100",
+      "Date Modified" : "2021-01-27 12:14:16 +0100",
+      "Folder" : "Visuel",
+      "Title" : "Créer une alerte simple",
+      "Fragments" : [
+        {
+          "Content" : "  func displayAlert() {\n        let alertController = UIAlertController(title: \"Add ingredients for shearch recipes !\", message: \"\", preferredStyle: .alert)\n        \n        let addAction = UIAlertAction(title: \"Ok\", style: .default)\n        \n        \n        alertController.addAction(addAction)\n        present(alertController, animated: true, completion: nil)\n    }",
+          "Date Modified" : "2021-01-27 12:14:24 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-27 12:14:09 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-08-17 20:14:47 +0200",
+      "Date Modified" : "2021-08-17 20:14:56 +0200",
+      "Folder" : "Cell",
+      "Title" : "TableView Delegate",
+      "Fragments" : [
+        {
+          "Content" : "extension AddCustomChallengeViewController: UITableViewDelegate {\n\n    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {\n        if editingStyle == .delete {\n            \/\/\/ Delete coreData\n\n            tableView.deleteRows(at: [indexPath], with: .fade)\n            tableView.reloadData()\n        }\n\n    }\n}",
+          "Date Modified" : "2021-08-17 20:24:01 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-08-17 20:14:47 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-24 10:28:49 +0100",
+      "Date Modified" : "2021-03-24 11:40:34 +0100",
+      "Folder" : "Divers",
+      "Title" : "Func : Date Today",
+      "Fragments" : [
+        {
+          "Content" : "func dateTodayString() -> String {\n    let dateFormatter = DateFormatter()\n    dateFormatter.locale = Locale(identifier: \"fr\")\n\n    dateFormatter.dateFormat = \"dd MMM yyyy\"\n\n    let dateFormated = dateFormatter.string(from: Date())\n    return dateFormated\n}",
+          "Date Modified" : "2021-02-24 10:28:49 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-24 10:28:49 +0100"
+        }
+      ],
+      "Tags" : [
+        "Fonction",
+        "Date"
+      ]
+    },
+    {
+      "Date Created" : "2021-09-07 16:34:30 +0200",
+      "Date Modified" : "2021-09-07 16:34:40 +0200",
+      "Folder" : "SWIFTUI",
+      "Title" : "lier deux vues avec un bouton",
+      "Fragments" : [
+        {
+          "Content" : "@State private var isPresentedBool = false   \n   \n   Button(\"Ajouter une plante\") {\n                        isPresentedBool.toggle()\n                  \n                    }.sheet(isPresented: $isPresentedBool) {\n                        AddPlantsSwiftUIView()\n                                 }\n                    ",
+          "Date Modified" : "2021-09-07 16:34:49 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Plain Text",
+          "Date Created" : "2021-09-07 16:34:30 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-06-25 10:46:34 +0200",
+      "Date Modified" : "2021-06-25 10:46:44 +0200",
+      "Folder" : "Cell",
+      "Title" : "Supprimer cell tableView",
+      "Fragments" : [
+        {
+          "Content" : "func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {\n    if editingStyle == .delete {\n        PresentService.shared.removePresent(at: indexPath.row)\n        tableView.deleteRows(at: [indexPath], with: .automatic)\n    }\n}",
+          "Date Modified" : "2021-06-25 10:46:54 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-06-25 10:46:34 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-09-27 17:52:20 +0200",
+      "Date Modified" : "2021-09-27 17:52:30 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Segmented control",
+      "Fragments" : [
+        {
+          "Content" : " recurrenceControl.selectedSegmentIndex",
+          "Date Modified" : "2021-09-27 17:52:32 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-09-27 17:52:20 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-03-24 11:39:16 +0100",
+      "Date Modified" : "2021-03-24 11:39:16 +0100",
+      "Folder" : "Divers",
+      "Title" : "Func : Convertir String en Date",
+      "Fragments" : [
+        {
+          "Content" : "   func stringToDateConvert(dateString:String) -> Date {\n        let dateFormatter = DateFormatter()\n        dateFormatter.locale = Locale(identifier: \"fr\")\n        dateFormatter.dateFormat = \"dd MMM yyyy\"\n        let date = dateFormatter.date(from:dateString)!\n        return date\n    }\n    \n    \n    \/\/Source : stackoverflow.com\/questions\/36861732\/convert-string-to-date-in-swift",
+          "Date Modified" : "2021-03-24 11:41:25 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-03-24 11:39:16 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 18:26:20 +0100",
+      "Date Modified" : "2021-01-26 18:26:40 +0100",
+      "Folder" : "Appel Réseaux",
+      "Title" : "Request Service (Alamofire)",
+      "Fragments" : [
+        {
+          "Content" : "func getData(food:String,callback: @escaping (Result<NomDeTaStructure, RecipeError>) -> Void) {\n            \n            \n            guard let mainUrl = URL(string:\"https:\/\/\") else {return}\n            \n            \/\/Parameters avec les tuples\n            \n            let parameters = [(\"q\",food),(\"app_id\",\"4cd6a87a\"),(\"app_key\",\"ec8a043cd61e4611c5f52cc748eacb01\"),(\"from\",0),(\"to\",10),(\"calories\",\"0-1000\")] as [(String, Any)]?\n            \n            let url = encode(baseUrl: mainUrl, with: parameters)\n            session.request(url: url) { dataResponse in\n                guard let data = dataResponse.data else {\n                    callback(.failure(.noData))\n                    return\n                }\n                guard dataResponse.response?.statusCode == 200 else {\n                    print(data)\n                    callback(.failure(.invalidResponse))\n                    return\n                }\n                guard let dataDecoded = try? JSONDecoder().decode(NomDeTaStructure.self, from: data) else {\n                    callback(.failure(.undecodableData))\n                    return\n                }\n                callback(.success(dataDecoded))\n            }\n        }",
+          "Date Modified" : "2021-01-26 19:12:22 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 18:26:20 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-09-13 17:43:10 +0200",
+      "Date Modified" : "2021-09-13 17:43:27 +0200",
+      "Folder" : "SWIFTUI",
+      "Title" : "Faire disparaître une pile de vue",
+      "Fragments" : [
+        {
+          "Content" : "   @Environment(\\.presentationMode) var presentationMode: Binding<PresentationMode>\n   \n   \n   var body: some View {\n   \n   Button(\"Ajouter la plante\") {\n    action: do { self.presentationMode.wrappedValue.dismiss() }\n}\n\n}\n\n\/\/https: \/\/ stackoverflow.com\/questions\/56513568\/ios-swiftui-pop-or-dismiss-view-programmatically",
+          "Date Modified" : "2021-09-13 17:58:09 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-09-13 17:43:10 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-09-13 16:37:41 +0200",
+      "Date Modified" : "2021-09-13 16:37:48 +0200",
+      "Folder" : "SWIFTUI",
+      "Title" : "save persistence Controller",
+      "Fragments" : [
+        {
+          "Content" : "\/\/\n\/\/  Persistence.swift\n\/\/  PlantsParadise\n\/\/\n\/\/  Created by Maxime on 03\/09\/2021.\n\/\/\n\nimport CoreData\n\nstruct PersistenceController {\n    static let shared = PersistenceController()\n\n    static var preview: PersistenceController = {\n        let result = PersistenceController(inMemory: true)\n        let viewContext = result.container.viewContext\n        for _ in 0..<10 {\n            let newItem = Plants(context: viewContext)\n            newItem.timestamp = Date()\n        }\n        do {\n            try viewContext.save()\n        } catch {\n            \/\/ Replace this implementation with code to handle the error appropriately.\n            \/\/ fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.\n            let nsError = error as NSError\n            fatalError(\"Unresolved error \\(nsError), \\(nsError.userInfo)\")\n        }\n        return result\n    }()\n\n    let container: NSPersistentCloudKitContainer\n\n    init(inMemory: Bool = false) {\n        container = NSPersistentCloudKitContainer(name: \"PlantsParadise\")\n        if inMemory {\n            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: \"\/dev\/null\")\n        }\n        container.loadPersistentStores(completionHandler: { (storeDescription, error) in\n            if let error = error as NSError? {\n                \/\/ Replace this implementation with code to handle the error appropriately.\n                \/\/ fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.\n\n                \/*\n                Typical reasons for an error here include:\n                * The parent directory does not exist, cannot be created, or disallows writing.\n                * The persistent store is not accessible, due to permissions or data protection when the device is locked.\n                * The device is out of space.\n                * The store could not be migrated to the current model version.\n                Check the error message to determine what the actual problem was.\n                *\/\n                fatalError(\"Unresolved error \\(error), \\(error.userInfo)\")\n            }\n        })\n    }\n}\n",
+          "Date Modified" : "2021-09-13 16:37:53 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-09-13 16:37:41 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 18:30:32 +0100",
+      "Date Modified" : "2021-01-26 18:30:53 +0100",
+      "Folder" : "Cell",
+      "Title" : "TableView cell DataSource",
+      "Fragments" : [
+        {
+          "Content" : "extension NameViewController: UITableViewDataSource{\n    \n    func numberOfSections(in tableView: UITableView) -> Int {\n        return 1\n    }\n    \n    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {\n        return coreDataManager?.entity.count ?? 0\n    }\n    \n    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {\n        \n        let TaCell =\n            tableView.dequeueReusableCell(withIdentifier: \"leNomDeTaCell\", for: indexPath)\n        \n        TaCell.textLabel?.text = coreDataManager?.entity[indexPath.row].taData\n        \n        return TaCell\n    }",
+          "Date Modified" : "2021-01-26 18:32:01 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 18:30:32 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-06-25 15:14:46 +0200",
+      "Date Modified" : "2021-06-25 15:14:56 +0200",
+      "Folder" : "Tableau",
+      "Title" : "retourner objet aléatoire dans un tableau",
+      "Fragments" : [
+        {
+          "Content" : "   \n    var capacityArray = [\"Pistolet de duel\",\"Clés de passe-partout\",\"Transmuteur\",\"Arc de cupidon\",\"Bombe atomique\",\"talisman de protection\", \"Godiveau\"]\n    \n    func randomCapacityReturn() -> String {\n        let randomCapacity = Int.random(in: 0...100)\n        if randomCapacity > 80 {\n            let index = Int.random(in: 0..<capacityArray.count)\n            return capacityArray[index]\n        }\n        return \"aucun objet\"\n    }",
+          "Date Modified" : "2021-07-15 18:53:05 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-06-25 15:14:46 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-09-23 14:05:32 +0200",
+      "Date Modified" : "2021-09-23 14:05:58 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Library & camera exemple",
+      "Fragments" : [
+        {
+          "Content" : "class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {\n\n    @IBOutlet weak var victoryAddImageButton: UIButton!\n\n\n@IBAction func tappedAddImageButton(_ sender: Any) {\n    if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {\n        let imagePickerController = UIImagePickerController()\n        imagePickerController.delegate = self\n        imagePickerController.sourceType = .photoLibrary\n        self.present(imagePickerController, animated: true, completion: nil)\n    }\n}\n\nfunc imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {\n\npicker.dismiss(animated: true, completion: nil)\n\nif let image = info[.originalImage] as? UIImage {\n        victoryAddImageButton.setImage(image, for: .normal)\n        victoryAddImageButton.imageView?.contentMode = .scaleAspectFill\n    }\n}\n}",
+          "Date Modified" : "2021-10-17 15:47:10 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-09-23 14:05:32 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-05-14 13:49:59 +0200",
+      "Date Modified" : "2021-05-14 13:49:59 +0200",
+      "Folder" : "Uncategorized",
+      "Title" : "Créer une alerte avec annulation ou confirmation",
+      "Fragments" : [
+        {
+          "Content" : "  let alertController = UIAlertController(title: \"Êtes-vous sur de vouloir terminer cette journée? \", message: \"\", preferredStyle: .alert)\n        let cancel = UIAlertAction(title: \"Annuler\",style: .cancel)\n        let confirm = UIAlertAction(title: \"Confirmer\", style: .default, handler: { _ in\n            \n\/\/code\n          \n        })\n        alertController.addAction(confirm)\n        alertController.addAction(cancel)\n        present(alertController, animated: true, completion: nil)",
+          "Date Modified" : "2021-05-14 13:49:59 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-05-14 13:49:59 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-05 14:54:01 +0100",
+      "Date Modified" : "2021-02-05 14:54:01 +0100",
+      "Folder" : "Animation",
+      "Title" : "TextField disparition",
+      "Fragments" : [
+        {
+          "Content" : "func animateTextFieldDisappear() {\n    UIView.animateKeyframes(withDuration: 0.4, delay: 0, options: .calculationModeDiscrete, animations: { self.textFieldForAddTask.isHidden = true\n        self.textFieldForAddTask.alpha = 0\n    })\n}",
+          "Date Modified" : "2021-02-05 14:54:01 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-05 14:54:01 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-09-07 15:10:19 +0200",
+      "Date Modified" : "2021-09-07 15:10:23 +0200",
+      "Folder" : "SWIFTUI",
+      "Title" : "stepper",
+      "Fragments" : [
+        {
+          "Content" : "\n    @State private var age = 18\n\n \n VStack {\n            Stepper(\"Enter your age\", onIncrement: {\n                age += 1\n            }, onDecrement: {\n                age -= 1\n            })\n\n            Text(\"Your age is \\(age)\")\n        }\n    }",
+          "Date Modified" : "2021-09-07 15:11:08 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-09-07 15:10:19 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-27 12:15:51 +0100",
+      "Date Modified" : "2021-01-27 12:16:00 +0100",
+      "Folder" : "Visuel",
+      "Title" : "Créer une alerte avec textField",
+      "Fragments" : [
+        {
+          "Content" : " func displayAlertWithTextField(handlerTaskName: @escaping (String?) -> Void) {\n        let alertController = UIAlertController(title: \"Add new task\", message: \"\", preferredStyle: .alert)\n        alertController.addTextField { textField in\n            textField.placeholder = \"Task\"\n        }\n        let addAction = UIAlertAction(title: \"Add\", style: .default, handler: { _ in\n            guard let textField = alertController.textFields else { return }\n            handlerTaskName(textField[0].text)\n        })\n        alertController.addAction(addAction)\n        present(alertController, animated: true, completion: nil)\n    }",
+          "Date Modified" : "2021-01-27 12:16:14 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-27 12:15:51 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-26 18:39:10 +0100",
+      "Date Modified" : "2021-01-26 18:40:37 +0100",
+      "Folder" : "KeyBoard",
+      "Title" : "Gestion du Clavier",
+      "Fragments" : [
+        {
+          "Content" : "   \/\/MARK:- KeyBoard Gestion ⌨️\n   \n   \/\/— 💡 à relier à une gesture\n    \n    @IBAction func dismissKeyboard(_ sender: Any) {\n        tonTextField.resignFirstResponder()\n        \n    }\n    \n    \/\/ Le textfield dois être relié à un delegate et la class dois hériter du protocol\n    \n    func textFieldShouldReturn(_ textField: UITextField) -> Bool {\n        tonTextField.resignFirstResponder()\n        return true\n    }\n    ",
+          "Date Modified" : "2021-10-02 18:42:00 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-26 18:39:10 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-20 24:59:40 +0100",
+      "Date Modified" : "2021-02-20 24:59:40 +0100",
+      "Folder" : "Navigation",
+      "Title" : "Afficher un texte au dessus de la nav bar",
+      "Fragments" : [
+        {
+          "Content" : "navigationItem.prompt = NSLocalizedString(\" \", comment: \"\")",
+          "Date Modified" : "2021-02-20 24:59:40 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-20 24:59:40 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-01-30 21:54:17 +0100",
+      "Date Modified" : "2021-01-30 21:54:21 +0100",
+      "Folder" : "AlamofireTest",
+      "Title" : "FakeResponseData",
+      "Fragments" : [
+        {
+          "Content" : "\nimport Foundation\n\nfinal class FakeResponseData {\n    static let responseOK = HTTPURLResponse(url: URL(string: \"https:\/\/www.apple.com\")!, statusCode: 200, httpVersion: nil, headerFields: nil)!\n    static let responseKO = HTTPURLResponse(url: URL(string: \"https:\/\/www.apple.com\")!, statusCode: 500, httpVersion: nil, headerFields: nil)!\n    \n    class NetworkError: Error {}\n    static let networkError = NetworkError()\n    \n    static var correctData: Data {\n        let bundle = Bundle(for: FakeResponseData.self)\n        let url = bundle.url(forResource: \"YourJsonFile\", withExtension: \"json\")\n        let data = try! Data(contentsOf: url!)\n        return data\n    }\n    \n    static let incorrectData = \"erreur\".data(using: .utf8)!\n}\n",
+          "Date Modified" : "2021-01-30 21:55:16 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-01-30 21:54:17 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-02-18 19:55:38 +0100",
+      "Date Modified" : "2021-02-18 19:55:40 +0100",
+      "Folder" : "Segues",
+      "Title" : "unwind segue",
+      "Fragments" : [
+        {
+          "Content" : "\/\/A ajouter dans le controller de destination\n@IBAction func unwindToWelcome(segue:UIStoryboardSegue) { }",
+          "Date Modified" : "2021-02-18 20:00:06 +0100",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-02-18 19:55:38 +0100"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    },
+    {
+      "Date Created" : "2021-09-23 17:47:48 +0200",
+      "Date Modified" : "2021-09-23 18:25:42 +0200",
+      "Folder" : "CoreData",
+      "Title" : "CoreDataManager",
+      "Fragments" : [
+        {
+          "Content" : "import UIKit\nimport CoreData\n\nfinal class CoreDataManager {\n\n    \/\/ MARK: - Properties\n\n    private let coreDataStack: CoreDataStack\n    private let managedObjectContext: NSManagedObjectContext\n\n    var Entity: [Entity] {\n        let request: NSFetchRequest<Players> = Players.fetchRequest()\n        request.sortDescriptors = [NSSortDescriptor(key: \"score\", ascending: false)]\n        guard let players = try? managedObjectContext.fetch(request) else { return [] }\n        return players\n    }\n\n       \/\/ MARK: - Initializer\n\n    init(coreDataStack: CoreDataStack) {\n        self.coreDataStack = coreDataStack\n        self.managedObjectContext = coreDataStack.mainContext\n    }\n\n    \/\/ MARK: - Manage func Entity\n\n    func saveData(index: Int) {\n        let games = game.first\n        games?.challengeCustom = Double(index)\n        coreDataStack.saveContext()\n    }\n",
+          "Date Modified" : "2021-09-23 17:49:04 +0200",
+          "Note" : "",
+          "Title" : "Fragment",
+          "Language" : "Swift",
+          "Date Created" : "2021-09-23 17:47:48 +0200"
+        }
+      ],
+      "Tags" : [
+
+      ]
+    }
+  ]
+}
