@@ -11,52 +11,44 @@ import UniformTypeIdentifiers
 
 class HomeViewController: UIViewController, UIDocumentPickerDelegate,UINavigationControllerDelegate {
     
-   
+  var resultHome = [Response]()
+  let localJsonService = LocalJsonService()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addButton()
     }
     
-    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let myURL = urls.first else {
-            return
-        }
-        print("import result : \(myURL)")
-    }
-          
-
-    public func documentMenu(documentPicker: UIDocumentPickerViewController) {
-        documentPicker.delegate = self
-        present(documentPicker, animated: true, completion: nil)
-    }
-
-
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        print("view was cancelled")
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func selectFiles() {
-        let types = UTType.types(tag: "json",
-                                 tagClass: UTTagClass.filenameExtension,
-                                 conformingTo: nil)
-        let documentPickerController = UIDocumentPickerViewController(
-            forOpeningContentTypes: types)
-        documentPickerController.delegate = self
-        self.present(documentPickerController, animated: true, completion: nil)
-    }
-    
+    //MARK: - Button action
     @objc func buttonTapped() {
-   selectFiles()
+ // create alert with textfield
     }
+
+    //MARK: - Data Gestion
     
+    private func fetchData()  -> (Result<[Response], NetworkError>) -> () {
+        let anonymousFunction = { (result: Result<[Response], NetworkError>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let fetchResult):
+                    self.resultHome = fetchResult
+                    print(self.resultHome)
+                case .failure(_):
+                    print("error")
+                }
+    }
+        }
+        return anonymousFunction
+    }
+
+    //MARK: - Interface gestion
     
     private func addButton() {
     let mainButton = UIButton()
     mainButton.translatesAutoresizingMaskIntoConstraints=false
         mainButton.addTarget (self, action: #selector (self.buttonTapped), for: . touchUpInside)
-        mainButton.setTitle("select JSON", for: .normal)
+        mainButton.setTitle("Your JSON url", for: .normal)
         mainButton.setTitleColor(.white, for: .normal)
         mainButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         mainButton.backgroundColor  = .gray
@@ -75,6 +67,19 @@ class HomeViewController: UIViewController, UIDocumentPickerDelegate,UINavigatio
     attribute: .height, multiplier: 1.0, constant: 75)
     let constraints: [NSLayoutConstraint] = [horizontalCenter, verticalCenter, width, height]
     NSLayoutConstraint.activate(constraints)
+    }
+    
+    //MARK: - Others
+    
+    func selectFiles() {
+        let types = UTType.types(tag: "json",
+                                 tagClass: UTTagClass.filenameExtension,
+                                 conformingTo: nil)
+        let documentPickerController = UIDocumentPickerViewController(
+            forOpeningContentTypes: types)
+        documentPickerController.delegate = self
+        
+        self.present(documentPickerController, animated: true, completion: nil)
     }
 }
 
